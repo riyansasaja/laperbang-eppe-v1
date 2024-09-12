@@ -10,6 +10,6 @@ class Dashboard extends BaseController
     public function index()
     {
         //
-        echo "ini dashboard";
+        return view('dashboard/dashboard');
     }
 }
