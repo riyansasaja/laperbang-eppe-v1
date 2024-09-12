@@ -1,5 +1,9 @@
 <?= $this->extend('dashboard/layout') ?>
 
+<?= $this->section('header') ?>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<?= $this->endSection() ?>
 
 <?= $this->section('breadcumb') ?>
 
@@ -25,4 +29,9 @@
         <h5>ini banding index</h5>
     </div>
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('pageScripts') ?>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="<?= base_url('assets/js/user_banding.js') ?>"></script>
 <?= $this->endSection() ?>

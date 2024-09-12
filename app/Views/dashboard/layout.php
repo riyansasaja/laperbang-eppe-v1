@@ -132,7 +132,15 @@
                 });
             }
         });
-    </script> <!--end::OverlayScrollbars Configure--> <!--end::Script-->
+    </script> <!--end::OverlayScrollbars Configure-->
+
+    <script>
+        let baseUrl = <?= json_encode(base_url()) ?>;
+        let error = <?= json_encode(session()->getFlashdata('error')) ?>;
+        let success = <?= json_encode(session()->getFlashdata('success')) ?>;
+    </script>
+
+    <!--end::Script-->
     <?= $this->renderSection('pageScripts') ?>
 </body><!--end::Body-->
 
