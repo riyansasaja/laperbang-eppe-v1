@@ -1,4 +1,24 @@
+<?php
+
+use CodeIgniter\Throttle\ThrottlerInterface;
+?>
 <?= $this->extend('dashboard/layout') ?>
+<?= $this->section('breadcumb') ?>
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="mb-0">Dashboard</h3>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item active">Home</li>
+        </ol>
+    </div>
+</div> <!--end::Row-->
+
+<?= $this->endSection() ?>
+
 <?= $this->section('main') ?>
 
 

@@ -24,9 +24,12 @@
         <nav class="app-header navbar navbar-expand bg-body"> <!--begin::Container-->
             <div class="container-fluid"> <!--begin::Start Navbar Links-->
 
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="bi bi-list"></i> </a> </li>
+                </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
+
                 <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
 
-                    </li> <!--end::Messages Dropdown Menu--> <!--begin::Notifications Dropdown Menu-->
                     <li class="nav-item dropdown"> <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i class="bi bi-bell-fill"></i> <span class="navbar-badge badge text-bg-warning">15</span> </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <span class="dropdown-item dropdown-header">15 Notifications</span>
                             <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"> <i class="bi bi-envelope me-2"></i> 4 new messages
@@ -50,120 +53,47 @@
                                 </p>
                             </li> <!--end::User Image--> <!--begin::Menu Body-->
                             <!--end::Menu Body--> <!--begin::Menu Footer-->
-                            <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Profile</a> <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> </li> <!--end::Menu Footer-->
+                            <li class="user-footer">
+                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="<?= base_url('logout') ?>" class="btn btn-default btn-flat float-end">Sign out</a>
+                            </li> <!--end::Menu Footer-->
                         </ul>
                     </li> <!--end::User Menu Dropdown-->
                 </ul> <!--end::End Navbar Links-->
             </div> <!--end::Container-->
         </nav> <!--end::Header--> <!--begin::Sidebar-->
+
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index.html" class="brand-link"> <!--begin::Brand Image--> <img src="<?= base_url('assets/img/logoapp.png') ?>" alt="Laperbang Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">Laper Bang</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-brand">
+                <!--begin::Brand Link-->
+                <a href="../index.html" class="brand-link">
+                    <!--begin::Brand Image-->
+                    <img src="<?= base_url('assets/img/logoapp.png') ?>" alt="Laperbang Logo" class="brand-image opacity-75 shadow">
+                    <!--begin::Brand Text-->
+                    <span class="brand-text fw-light">Laper Bang</span>
+                    <!--end::Brand Text-->
+                </a> <!--end::Brand Link-->
+            </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+
             <div class="sidebar-wrapper">
-                <nav class="mt-2"> <!--begin::Sidebar Menu-->
+
+                <?= view('App\Views\dashboard\sidemenu') ?>
 
 
-                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-
-
-                        <!-- mulai menu aside -->
-                        <li class="nav-header">Home</li>
-                        <li class="nav-item"> <a href="../docs/introduction.html" class="nav-link"> <i class="nav-icon bi bi-speedometer"></i>
-                                <p>Dashboard</p>
-                            </a> </li>
-                        <!-- end menu aside -->
-
-                        <!-- =======================ini contoh -->
-                        <!-- <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-table"></i>
-                                <p>
-                                    Tables
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="../tables/simple.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Simple Tables</p>
-                                    </a> </li>
-                            </ul>
-                        </li>
-                        <li class="nav-header">EXAMPLES</li>
-                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-arrow-in-right"></i>
-                                <p>
-                                    Auth
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-arrow-in-right"></i>
-                                        <p>
-                                            Version 1
-                                            <i class="nav-arrow bi bi-chevron-right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item"> <a href="../examples/login.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                                <p>Login</p>
-                                            </a> </li>
-                                        <li class="nav-item"> <a href="../examples/register.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                                <p>Register</p>
-                                            </a> </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-arrow-in-right"></i>
-                                        <p>
-                                            Version 2
-                                            <i class="nav-arrow bi bi-chevron-right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item"> <a href="../examples/login-v2.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                                <p>Login</p>
-                                            </a> </li>
-                                        <li class="nav-item"> <a href="../examples/register-v2.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                                <p>Register</p>
-                                            </a> </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"> <a href="../examples/lockscreen.html" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
-                                        <p>Lockscreen</p>
-                                    </a> </li>
-                            </ul>
-                        </li>
-                        <li class="nav-header">DOCUMENTATIONS</li>
-                        <li class="nav-item"> <a href="../docs/introduction.html" class="nav-link"> <i class="nav-icon bi bi-download"></i>
-                                <p>Installation</p>
-                            </a> </li> -->
-                        <!-- ============ end contoh -->
-
-
-                    </ul> <!--end::Sidebar Menu-->
-
-                </nav>
             </div> <!--end::Sidebar Wrapper-->
         </aside> <!--end::Sidebar--> <!--begin::App Main-->
         <main class="app-main"> <!--begin::App Content Header-->
-            <div class="app-content-header"> <!--begin::Container-->
-                <div class="container-fluid"> <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="mb-0">Dashboard</h3>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item active"><a href="#">Home</a></li>
-                            </ol>
-                        </div>
-                    </div> <!--end::Row-->
+            <div class="app-content-header">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <?= $this->renderSection('breadcumb') ?>
                 </div> <!--end::Container-->
-            </div> <!--end::App Content Header--> <!--begin::App Content-->
-            <div class="app-content"> <!--begin::Container-->
+            </div> <!--end::App Content Header-->
+            <!--begin::App Content-->
+            <div class="app-content">
+                <!--begin::Container-->
                 <div class="container-fluid"> <!-- Small Box (Stat card) -->
-
                     <?= $this->renderSection('main') ?>
-
-
-
-
-
                 </div> <!--end::Container-->
             </div> <!--end::App Content-->
         </main> <!--end::App Main--> <!--begin::Footer-->
