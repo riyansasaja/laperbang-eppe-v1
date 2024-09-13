@@ -66,7 +66,7 @@
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
             <div class="sidebar-brand">
                 <!--begin::Brand Link-->
-                <a href="../index.html" class="brand-link">
+                <a href="<?= base_url('/') ?>" class="brand-link">
                     <!--begin::Brand Image-->
                     <img src="<?= base_url('assets/img/logoapp.png') ?>" alt="Laperbang Logo" class="brand-image opacity-75 shadow">
                     <!--begin::Brand Text-->

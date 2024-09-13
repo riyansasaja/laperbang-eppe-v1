@@ -9,7 +9,7 @@
 
             <li class="nav-header">Home Admin</li>
             <li class="nav-item">
-                <a href="" class="nav-link"> <i class="nav-icon bi bi-speedometer"></i>
+                <a href="<?= base_url('/') ?>" class="nav-link"> <i class="nav-icon bi bi-speedometer"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
@@ -17,7 +17,7 @@
         <?php elseif (in_groups('user')) : ?>
             <li class="nav-header">Home User</li>
             <li class="nav-item">
-                <a href="" class="nav-link"> <i class="nav-icon bi bi-speedometer"></i>
+                <a href="<?= base_url('/') ?>" class="nav-link"> <i class="nav-icon bi bi-speedometer"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
