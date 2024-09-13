@@ -15,5 +15,6 @@ $routes->get('getstatus', 'ApilogStatus::find');
 $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {
     $routes->get('banding', 'Banding::index');
     $routes->get('getbanding', 'Banding::getPerkarabanding');
-    $routes->get('addperkara', 'Banding::addperkara');
+    $routes->get('addbanding', 'Banding::addPerkarabanding');
+    $routes->post('addbanding', 'Banding::addPerkarabanding');
 });

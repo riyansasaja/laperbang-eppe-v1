@@ -109,10 +109,20 @@
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="<?= base_url('assets/js/adminlte.js') ?>"></script>
+
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- for sweet alert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- variabel for url dan sweet alert -->
+    <script>
+        let baseUrl = <?= json_encode(base_url()) ?>;
+        let error = <?= json_encode(session()->getFlashdata('error')) ?>;
+        let success = <?= json_encode(session()->getFlashdata('success')) ?>;
+    </script>
 
-    <script src="<?= base_url('assets/js/adminlte.js') ?>"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {
@@ -137,11 +147,7 @@
         });
     </script> <!--end::OverlayScrollbars Configure-->
 
-    <script>
-        let baseUrl = <?= json_encode(base_url()) ?>;
-        let error = <?= json_encode(session()->getFlashdata('error')) ?>;
-        let success = <?= json_encode(session()->getFlashdata('success')) ?>;
-    </script>
+
 
     <!--end::Script-->
     <?= $this->renderSection('pageScripts') ?>

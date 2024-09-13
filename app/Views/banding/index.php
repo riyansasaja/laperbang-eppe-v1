@@ -26,7 +26,7 @@
 <div class="row">
     <div class="col">
         <!-- //tabel menampilkan all data -->
-        <a href="<?= base_url('user/addperkara') ?>" class="btn btn-primary text-white"><i class="bi bi-database-fill-add"></i> Tambah Data</a>
+        <a href="<?= base_url('user/addbanding') ?>" class="btn btn-primary text-white"><i class="bi bi-database-fill-add"></i> Tambah Data</a>
 
 
         <table class="table table-striped" id="dataPerkara">

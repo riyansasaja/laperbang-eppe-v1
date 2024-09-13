@@ -25,6 +25,24 @@ let getperkara = $('#dataPerkara').DataTable({
 });
 
 
+if (error) {
+
+    Swal.fire({
+        title: "Error",
+        text: JSON.stringify(error),
+        icon: "error"
+      });
+}
+
+if (success) {
+
+    Swal.fire({
+        title: "Success",
+        text: success,
+        icon: "success"
+      });
+}
+
 // fungsi get banding
 function getbanding() {
     $.ajax({
