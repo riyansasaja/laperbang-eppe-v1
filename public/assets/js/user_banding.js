@@ -17,8 +17,8 @@ let getperkara = $('#dataPerkara').DataTable({
             { "data": "status" },
             {
                 "data": null,
-                "defaultContent": `<a href="javascript:;" id='view_doc' class="badge text-bg-primary text-decoration-none me-2"><i class="bi bi-cloudy-fill">Upload</i> <br>
-                <a href="javascript:;" id='view_doc' class="badge text-bg-warning text-decoration-none"><i class="bi bi-vector-pen">Edit</i>
+                "defaultContent": `<a href="javascript:;" id='view_doc' class="badge text-bg-info text-decoration-none me-2"><i class="bi bi-cloud-arrow-up"></i> Upload</i> <br>
+                <a href="javascript:;" id='view_doc' class="badge text-bg-warning text-decoration-none"><i class="bi bi-vector-pen"> Edit</i>
                 `
             }
         ]
