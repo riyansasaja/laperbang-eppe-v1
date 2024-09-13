@@ -1,8 +1,7 @@
 <?= $this->extend('dashboard/layout') ?>
 
 <?= $this->section('header') ?>
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
-<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.min.css" />
 <?= $this->endSection() ?>
 
 <?= $this->section('breadcumb') ?>
@@ -26,12 +25,35 @@
 
 <div class="row">
     <div class="col">
-        <h5>ini banding index</h5>
+        <!-- //tabel menampilkan all data -->
+
+
+        <table class="table table-striped" id="dataPerkara">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nomor Perkara</th>
+                    <th scope="col">Jenis Perkara</th>
+                    <th scope="col">Nomor Banding</th>
+                    <th scope="col">Tgl Upload</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+
+
+
     </div>
 </div>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="<?= base_url('assets/js/user_banding.js') ?>"></script>
+<script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
 <?= $this->endSection() ?>
