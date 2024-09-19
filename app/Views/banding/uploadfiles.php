@@ -121,7 +121,7 @@
                                 <?php foreach ($bundelb as $b => $bundel) : ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= base_url('uploads/') . user()->username . '/' . $perkara->no_perkara . '/' . 'bundelb/' . $bundel['nama_file_b'] ?>" target="_blank" class="text-reset text-decoration-none">
+                                            <a href="<?= base_url('uploads/') . user()->username . '/' . clear($perkara->no_perkara)  . '/' . 'bundelb/' . $bundel['nama_file_b'] ?>" target="_blank" class="text-reset text-decoration-none">
                                                 <?= $bundel['label_b'] ?>
                                             </a>
 
@@ -139,7 +139,7 @@
                                         <?php endif; ?>
 
                                         <td>
-                                            <a href=""> <span class="badge text-bg-danger">Delete</span></a>
+                                            <a href="<?= base_url('user/delbundelb/') . $bundel['nama_file_b'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-danger">Delete</span></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

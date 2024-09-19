@@ -100,7 +100,7 @@ class Banding extends BaseController
         //ambil data perkara 
         $data['perkara'] = (object)$modelPerkara->where('id_perkara', $id)->first();
         //ambil data bundel b
-        $data['bundelb'] = $modelbundelb->select('label_b, nama_file_b, verval_status')->where('id_perkara', $id)->findAll();
+        $data['bundelb'] = $modelbundelb->where('id_perkara', $id)->findAll();
         $data['label'] = (object)$modelrefbundelb->findAll();
         return view('banding/uploadfiles', $data);
     }
@@ -152,10 +152,9 @@ class Banding extends BaseController
             return redirect()->to('/user/upload' . '/' . $id_perkara);
         }
 
-        //ganti nomor perkara "/" ke "-"
-        $new_no_perkara = str_replace('/', '-', $perkara->no_perkara);
-        // hapus string "."
-        $new_name = str_replace('.', '', $new_no_perkara);
+        // clear string
+        $new_name = clear($perkara->no_perkara);
+
         $newName = date('Ymdhis') . '_' . $label .   '.' . $files->getClientExtension();
         //pindahkan ke folder
         $files->move('uploads/' . $perkara->username . '/' . $new_name . '/' . 'bundelb/', $newName);
@@ -187,5 +186,20 @@ class Banding extends BaseController
         $data = ['errors' => 'The file has already been moved.'];
         session()->setFlashdata('error', $data);
         return redirect()->to('/user/upload' . '/' . $id_perkara);
+    }
+
+    public function delBundelB($nama_file, $nomorperkara)
+    {
+        $bundelbmodel = new ModelBundelB();
+        $username = user()->username;
+        $bundelb = $bundelbmodel->where('nama_file_b', $nama_file)->first();
+        $file = new \CodeIgniter\Files\File('uploads/' . $username . '/' . $nomorperkara . '/' . 'bundelb/' . $nama_file);
+        $delete = $bundelbmodel->where('nama_file_b', $nama_file)->delete();
+        if ($delete) {
+            # code...
+            $file->move('uploads/delete/');
+        }
+        session()->setFlashdata('success', 'Data Berhasil dihapus');
+        return redirect()->to('/user/upload' . '/' . $bundelb['id_perkara']);
     }
 }
