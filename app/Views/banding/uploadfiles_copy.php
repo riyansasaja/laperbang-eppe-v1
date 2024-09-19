@@ -25,29 +25,6 @@
 <?= $this->section('main') ?>
 
 
-<?php
-
-// dd($bundelb);
-// die;
-
-// $i = 1;
-// foreach ($bundelb as $b => $value) {
-//     # code...
-//     echo $value['label_b'];
-//     if ($value['label_b'] == 'Akta Banding') {
-//         # code...
-//         echo "cetak" . $i;
-//     }
-//     $i++;
-// }
-
-// die;
-
-
-
-?>
-
-
 <div class="row">
     <div class="col-5">
 
@@ -93,66 +70,39 @@
                 <?= form_hidden('id_perkara', $perkara->id_perkara) ?>
                 <div class="row">
                     <div class="col-4">
-
-                        <select class="form-select" name="label">
-                            <option selected>Pilih Yang Mau Diupload</option>
-                            <?php foreach ($label as $lab) : ?>
-                                <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
-
-                            <?php endforeach; ?>
-                        </select>
-
-                        <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
+                        <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding">
                     </div>
                     <div class="col-auto">
-                        <input class="form-control" type="file" name="bundelb" accept="application/pdf">
+                        <input class="form-control" type="file" name="bundelb">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-cloud-upload-fill"></i> Upload</button>
                     </div>
+                    <div class="col-auto">
+                        <a href="" class="form-control-plaintext"><i class="bi bi-stack"></i></a>
+                    </div>
                 </div>
                 <?= form_close(); ?>
 
-                <!-- Tampilan File -->
-                <div class="row mt-3">
-                    <div class="col">
-                        <table class="table">
-                            <tbody>
-                                <?php foreach ($bundelb as $b => $bundel) : ?>
-                                    <tr>
-                                        <td>
-                                            <a href="<?= base_url('uploads/') . user()->username . '/' . $perkara->no_perkara . '/' . 'bundelb/' . $bundel['nama_file_b'] ?>" target="_blank" class="text-reset text-decoration-none">
-                                                <?= $bundel['label_b'] ?>
-                                            </a>
-
-
-                                        </td>
-
-                                        <?php if ($bundel['verval_status'] == 1): ?>
-                                            <td><span class="badge text-bg-secondary text-white">Uploaded</span></td>
-                                        <?php elseif ($bundel['verval_status'] == 2) : ?>
-                                            <td><span class="badge text-bg-info text-white">Verified</span></td>
-                                        <?php elseif ($bundel['verval_status'] == 3) : ?>
-                                            <td><span class="badge text-bg-primary text-white">Validated</span></td>
-                                        <?php else : ?>
-                                            <td><span class="badge text-bg-danger text-white">Rejected</span></td>
-                                        <?php endif; ?>
-
-                                        <td>
-                                            <a href=""> <span class="badge text-bg-danger">Delete</span></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-
-                            </tbody>
-                        </table>
+                <?= form_open_multipart('user/uploadb'); ?>
+                <?= form_hidden('id_perkara', $perkara->id_perkara) ?>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Pemberitahuan Banding">
+                    </div>
+                    <div class="col-auto">
+                        <input class="form-control" type="file" name="bundelb">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-cloud-upload-fill"></i> Upload</button>
+                    </div>
+                    <div class="col-auto">
+                        <a href="" class="form-control-plaintext"><i class="bi bi-stack"></i></a>
                     </div>
                 </div>
+                <?= form_close(); ?>
 
             </div>
-
-
-
         </div>
     </div>
 

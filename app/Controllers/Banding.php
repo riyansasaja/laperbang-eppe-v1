@@ -14,6 +14,7 @@ use App\Models\ModelBundelB;
 use App\Models\ModelJenisPerkara;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
+use App\Models\ModelrefBundelB;
 use App\Models\UserModel;
 use Firebase\JWT\Key;
 use PhpParser\Node\Stmt\Echo_;
@@ -94,26 +95,44 @@ class Banding extends BaseController
     {
         //inisiasi model
         $modelPerkara = new ModelPerkara();
+        $modelbundelb = new ModelBundelB();
+        $modelrefbundelb = new ModelrefBundelB();
         //ambil data perkara 
         $data['perkara'] = (object)$modelPerkara->where('id_perkara', $id)->first();
+        //ambil data bundel b
+        $data['bundelb'] = $modelbundelb->select('label_b, nama_file_b, verval_status')->where('id_perkara', $id)->findAll();
+        $data['label'] = (object)$modelrefbundelb->findAll();
         return view('banding/uploadfiles', $data);
     }
 
     public function uploadBundelB()
     {
-        $modelPerkara = new ModelPerkara();
+        $modelPerkara = new ModelPerkara(); //inisaiasi model perkara
+        $modelbundelb = new ModelBundelB(); //inisiasi model bundel b
+        //ambil hasil kiriman file
         $label = $this->request->getPost('label');
         $id_perkara = $this->request->getPost('id_perkara');
         $files = $this->request->getFile('bundelb');
-
+        //ambil data perkara dari tabel perkara, join ke tb users
         $perkara = (object)$modelPerkara->select('tb_perkara.*, users.username')->join('users', 'tb_perkara.id_user=users.id')->where('tb_perkara.id_perkara', $id_perkara)->first();
-        // dd($label);
-        // dd($perkara);
-        // die;
+        $labelb = []; //buat array kosong untuk menampung data labelb
+        $hasupload =  $modelbundelb->where('id_perkara', $id_perkara)->findAll();
+        foreach ($hasupload as $key => $upload) {
+            # code...
+            $labelb[] = $upload['label_b']; //masukkan data ke array labelb
+        }
+        $cekfile = array_search($label, $labelb); //cek sudah ada jenis file serupa atau belum
 
+        if ($cekfile !== false) {
+            # Jika sudah ada file serupa langsung kasih pesan error
+            session()->setFlashdata('error', 'File Sudah Diupload, silahkan Hapus Terlebih dahulu');
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+        //Jika Belum ada file tersebut 
         //jalankan upload
 
-        //validate rule
+        //validate rule upload
         $validationRule = [
             'bundelb' => [
                 'label' => 'File',
@@ -130,7 +149,7 @@ class Banding extends BaseController
         if (!$this->validateData([], $validationRule)) {
             $data = ['errors' => $this->validator->getErrors()];
             session()->setFlashdata('error', $data);
-            return redirect()->to('/upload' . '/' . $id_perkara);
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
         }
 
         //ganti nomor perkara "/" ke "-"
@@ -147,6 +166,7 @@ class Banding extends BaseController
             $datadb = [
                 'id_perkara' => $id_perkara,
                 'nama_file_b' => $newName,
+                'label_b' => $label,
                 'verval_status' => '1'
             ];
             //masukkan ke dbd

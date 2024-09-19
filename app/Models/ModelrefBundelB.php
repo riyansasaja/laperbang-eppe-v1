@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ModelBundelB extends Model
+class ModelrefBundelB extends Model
 {
-    protected $table            = 'tb_bundel_b';
-    protected $primaryKey       = 'id_upload_b';
+    protected $table            = 'ref_bundel_b';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_perkara', 'nama_file_b', 'label_b', 'verval_status'];
+    protected $allowedFields    = ['nama_label'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
