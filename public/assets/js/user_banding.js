@@ -16,10 +16,11 @@ let getperkara = $('#dataPerkara').DataTable({
             { "data": "created_at", render :DataTable.render.date() },
             { "data": "status" },
             {
-                "data": null,
-                "defaultContent": `<a href="javascript:;" id='view_doc' class="badge text-bg-info text-decoration-none me-2"><i class="bi bi-cloud-arrow-up"></i> Upload</i> <br>
-                <a href="javascript:;" id='view_doc' class="badge text-bg-warning text-decoration-none"><i class="bi bi-vector-pen"> Edit</i>
-                `
+                "targets": [0],
+                render : function (data, type, row, meta) {
+                   return  `<a href="${baseUrl}user/upload/${row.id_perkara}" id='upload' class="badge text-bg-info text-decoration-none me-2"><i class="bi bi-cloud-arrow-up"></i> Upload</i> <br>
+                <a href="javascript:;" id='view_doc' class="badge text-bg-warning text-decoration-none"><i class="bi bi-vector-pen"> Edit</i>`
+                }
             }
         ]
 });

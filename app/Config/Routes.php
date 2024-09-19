@@ -17,4 +17,6 @@ $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {
     $routes->get('getbanding', 'Banding::getPerkarabanding');
     $routes->get('addbanding', 'Banding::addPerkarabanding');
     $routes->post('addbanding', 'Banding::addPerkarabanding');
+    $routes->get('upload/(:num)', 'Banding::uploadBundel/$1');
+    $routes->post('uploadb', 'Banding::uploadBundelB');
 });

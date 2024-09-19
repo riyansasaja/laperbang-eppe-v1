@@ -10,6 +10,7 @@ use config\Auth;
 use CodeIgniter\API\ResponseTrait;
 use \Firebase\JWT\JWT;
 use App\Models\LoginModel;
+use App\Models\ModelBundelB;
 use App\Models\ModelJenisPerkara;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
@@ -87,5 +88,84 @@ class Banding extends BaseController
             session()->setFlashdata('error', 'Data tidak berhasil ditambahkan, coba lagi!');
             return redirect()->to('user/banding');
         }
+    }
+
+    public function uploadBundel($id)
+    {
+        //inisiasi model
+        $modelPerkara = new ModelPerkara();
+        //ambil data perkara 
+        $data['perkara'] = (object)$modelPerkara->where('id_perkara', $id)->first();
+        return view('banding/uploadfiles', $data);
+    }
+
+    public function uploadBundelB()
+    {
+        $modelPerkara = new ModelPerkara();
+        $label = $this->request->getPost('label');
+        $id_perkara = $this->request->getPost('id_perkara');
+        $files = $this->request->getFile('bundelb');
+
+        $perkara = (object)$modelPerkara->select('tb_perkara.*, users.username')->join('users', 'tb_perkara.id_user=users.id')->where('tb_perkara.id_perkara', $id_perkara)->first();
+        // dd($label);
+        // dd($perkara);
+        // die;
+
+        //jalankan upload
+
+        //validate rule
+        $validationRule = [
+            'bundelb' => [
+                'label' => 'File',
+                'rules' => [
+                    'uploaded[bundelb]',
+                    'ext_in[bundelb,pdf]',
+                    // 'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+                    // 'max_size[inmailAttachmet, 2048]',
+                    // 'max_dims[userfile,1024,768]',
+                ],
+            ],
+        ];
+
+        if (!$this->validateData([], $validationRule)) {
+            $data = ['errors' => $this->validator->getErrors()];
+            session()->setFlashdata('error', $data);
+            return redirect()->to('/upload' . '/' . $id_perkara);
+        }
+
+        //ganti nomor perkara "/" ke "-"
+        $new_no_perkara = str_replace('/', '-', $perkara->no_perkara);
+        // hapus string "."
+        $new_name = str_replace('.', '', $new_no_perkara);
+        $newName = date('Ymdhis') . '_' . $label .   '.' . $files->getClientExtension();
+        //pindahkan ke folder
+        $files->move('uploads/' . $perkara->username . '/' . $new_name . '/' . 'bundelb/', $newName);
+
+        //cek file berhasil dipindahkan atau tidak
+        if ($files->hasMoved()) {
+            # ambil data 
+            $datadb = [
+                'id_perkara' => $id_perkara,
+                'nama_file_b' => $newName,
+                'verval_status' => '1'
+            ];
+            //masukkan ke dbd
+            $modelbundelb = new ModelBundelB();
+            $insertdb = $modelbundelb->insert($datadb);
+            if (!$insertdb) {
+                # kembalikan info gagal
+                $data = ['uploaded_fileinfo' => 'Gagal Input Database'];
+                session()->setFlashdata('error', $data);
+                return redirect()->to('/user/upload' . '/' . $id_perkara);
+            }
+            $data = ['uploaded_fileinfo' => 'Lampiran Berhasil di Upload'];
+            session()->setFlashdata('success', $data);
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+        //jika file gagal dipindahkan
+        $data = ['errors' => 'The file has already been moved.'];
+        session()->setFlashdata('error', $data);
+        return redirect()->to('/user/upload' . '/' . $id_perkara);
     }
 }
