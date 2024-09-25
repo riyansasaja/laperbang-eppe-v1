@@ -10,7 +10,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Dashboard::index',  ['filter' => 'role:admin,user']);
 $routes->get('getstatus', 'ApilogStatus::find');
 
-
+$routes->group("verifikator", ['filter' => 'role:admin,verifikator'], function ($routes) {
+    $routes->get('/', 'Verifikator::index');
+});
 
 $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {
     $routes->get('banding', 'Banding::index');
@@ -20,4 +22,6 @@ $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {
     $routes->get('upload/(:num)', 'Banding::uploadBundel/$1');
     $routes->post('uploadb', 'Banding::uploadBundelB');
     $routes->get('delbundelb/(:any)/(:any)', 'Banding::delBundelB/$1/$2');
+    $routes->post('uploada', 'Banding::uploadBundelA');
+    $routes->get('delbundela/(:any)/(:any)', 'Banding::delBundelA/$1/$2');
 });

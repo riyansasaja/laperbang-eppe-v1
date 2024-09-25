@@ -10,10 +10,12 @@ use config\Auth;
 use CodeIgniter\API\ResponseTrait;
 use \Firebase\JWT\JWT;
 use App\Models\LoginModel;
+use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelJenisPerkara;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
+use App\Models\ModelrefBundelA;
 use App\Models\ModelrefBundelB;
 use App\Models\UserModel;
 use Firebase\JWT\Key;
@@ -96,12 +98,16 @@ class Banding extends BaseController
         //inisiasi model
         $modelPerkara = new ModelPerkara();
         $modelbundelb = new ModelBundelB();
+        $modelbundela = new ModelBundelA();
         $modelrefbundelb = new ModelrefBundelB();
+        $modelrefbundela = new ModelrefBundelA();
         //ambil data perkara 
         $data['perkara'] = (object)$modelPerkara->where('id_perkara', $id)->first();
         //ambil data bundel b
         $data['bundelb'] = $modelbundelb->where('id_perkara', $id)->findAll();
+        $data['bundela'] = $modelbundela->where('id_perkara', $id)->findAll();
         $data['label'] = (object)$modelrefbundelb->findAll();
+        $data['label_a'] = (object)$modelrefbundela->select('nama_label')->findAll();
         return view('banding/uploadfiles', $data);
     }
 
@@ -113,6 +119,12 @@ class Banding extends BaseController
         $label = $this->request->getPost('label');
         $id_perkara = $this->request->getPost('id_perkara');
         $files = $this->request->getFile('bundelb');
+
+        //cek mereka kirim label atau tidak??
+        if ($label === "") {
+            session()->setFlashdata('error', 'Silahkan Pilih Jenis File yang Mau di Upload');
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
         //ambil data perkara dari tabel perkara, join ke tb users
         $perkara = (object)$modelPerkara->select('tb_perkara.*, users.username')->join('users', 'tb_perkara.id_user=users.id')->where('tb_perkara.id_perkara', $id_perkara)->first();
         $labelb = []; //buat array kosong untuk menampung data labelb
@@ -187,6 +199,114 @@ class Banding extends BaseController
         session()->setFlashdata('error', $data);
         return redirect()->to('/user/upload' . '/' . $id_perkara);
     }
+
+
+
+    function uploadBundelA()
+    {
+
+        $modelPerkara = new ModelPerkara(); //inisaiasi model perkara
+        $modelbundel = new ModelBundelA(); //inisiasi model bundel b
+        //ambil hasil kiriman file
+        $label = $this->request->getPost('label');
+        $id_perkara = $this->request->getPost('id_perkara');
+        $files = $this->request->getFile('bundela');
+
+        //cek mereka kirim label atau tidak??
+        if ($label === "") {
+            session()->setFlashdata('error', 'Silahkan Pilih Jenis File yang Mau di Upload');
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+        //ambil data perkara dari tabel perkara, join ke tb users
+        $perkara = (object)$modelPerkara->select('tb_perkara.*, users.username')->join('users', 'tb_perkara.id_user=users.id')->where('tb_perkara.id_perkara', $id_perkara)->first();
+        $labelb = []; //buat array kosong untuk menampung data labelb
+        $hasupload =  $modelbundel->where('id_perkara', $id_perkara)->findAll();
+        foreach ($hasupload as $key => $upload) {
+            # code...
+            $labelb[] = $upload['label_a']; //masukkan data ke array labelb
+        }
+        $cekfile = array_search($label, $labelb); //cek sudah ada jenis file serupa atau belum
+
+        if ($cekfile !== false) {
+            # Jika sudah ada file serupa langsung kasih pesan error
+            session()->setFlashdata('error', 'File Sudah Diupload, silahkan Hapus Terlebih dahulu');
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+        //Jika Belum ada file tersebut 
+        //jalankan upload
+
+        //validate rule upload
+        $validationRule = [
+            'bundela' => [
+                'label' => 'Bundel B',
+                'rules' => [
+                    'uploaded[bundela]',
+                    'ext_in[bundela,pdf]',
+                    // 'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+                    // 'max_size[inmailAttachmet, 2048]',
+                    // 'max_dims[userfile,1024,768]',
+                ],
+            ]
+        ];
+
+        if (!$this->validateData([], $validationRule)) {
+            $data = ['errors' => $this->validator->getErrors()];
+            session()->setFlashdata('error', $data);
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+        // clear string
+        $new_name = clear($perkara->no_perkara);
+
+        $newName = date('Ymdhis') . '_' . $label .   '.' . $files->getClientExtension();
+        //pindahkan ke folder
+        $files->move('uploads/' . $perkara->username . '/' . $new_name . '/' . 'bundela/', $newName);
+
+        //cek file berhasil dipindahkan atau tidak
+        if ($files->hasMoved()) {
+            # ambil data 
+            $datadb = [
+                'id_perkara' => $id_perkara,
+                'nama_file_a' => $newName,
+                'label_a' => $label,
+                'verval_status' => '1'
+            ];
+            //masukkan ke dbd
+            $insertdb = $modelbundel->insert($datadb);
+            if (!$insertdb) {
+                # kembalikan info gagal
+                $data = ['uploaded_fileinfo' => 'Gagal Input Database'];
+                session()->setFlashdata('error', $data);
+                return redirect()->to('/user/upload' . '/' . $id_perkara);
+            }
+            $data = ['uploaded_fileinfo' => 'Lampiran Berhasil di Upload'];
+            session()->setFlashdata('success', $data);
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+        //jika file gagal dipindahkan
+        $data = ['errors' => 'The file has already been moved.'];
+        session()->setFlashdata('error', $data);
+        return redirect()->to('/user/upload' . '/' . $id_perkara);
+    }
+
+    public function delBundelA($nama_file, $nomorperkara)
+    {
+        $bundelmodel = new ModelBundelA();
+        $username = user()->username;
+        $bundela = $bundelmodel->where('nama_file_a', $nama_file)->first();
+        $file = new \CodeIgniter\Files\File('uploads/' . $username . '/' . $nomorperkara . '/' . 'bundela/' . $nama_file);
+        $delete = $bundelmodel->where('nama_file_a', $nama_file)->delete();
+        if ($delete) {
+            # code...
+            $file->move('uploads/delete/');
+        }
+        session()->setFlashdata('success', 'Data Berhasil dihapus');
+        return redirect()->to('/user/upload' . '/' . $bundela['id_perkara']);
+    }
+
 
     public function delBundelB($nama_file, $nomorperkara)
     {
