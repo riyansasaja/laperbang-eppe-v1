@@ -25,15 +25,24 @@ class Banding extends BaseController
 {
 
     use ResponseTrait;
+    protected $validatorphone;
+
+    public function __construct()
+    {
+        $userModel = new UserModel();
+        $this->validatorphone = $userModel->select('phone')->where('username', 'validator')->first()->phone;
+    }
 
     public function index()
     {
         //
+
         return view('banding/index');
     }
 
     public function getPerkarabanding()
     {
+
         $modelPerkara = new ModelPerkara();
         $data = $modelPerkara->where('id_user', user()->id)->orderBy('id_perkara', 'desc')->findAll();
         if ($data == null) {
@@ -189,6 +198,9 @@ class Banding extends BaseController
                 session()->setFlashdata('error', $data);
                 return redirect()->to('/user/upload' . '/' . $id_perkara);
             }
+            //notification whatsapp
+            notification($this->validatorphone, $label . ' untuk Perkara ' . $perkara->no_perkara . ' selesai diupload, siap *divalidasi*');
+
             $data = ['uploaded_fileinfo' => 'Lampiran Berhasil di Upload'];
             session()->setFlashdata('success', $data);
             return redirect()->to('/user/upload' . '/' . $id_perkara);
