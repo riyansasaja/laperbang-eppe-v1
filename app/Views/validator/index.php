@@ -59,8 +59,14 @@
                                     <td><?= $bundel_b['fullname']; ?></td>
                                     <td><?= $bundel_b['label_b']; ?></td>
                                     <td>
-                                        <a href="<?= base_url('uploads/') . $bundel_b['username'] . '/' . clear($bundel_b['no_perkara']) . '/' . 'bundelb/' . $bundel_b['nama_file_b'] ?>" target="_blank" id="btn_view_b"><span class="badge text-bg-primary"><i class="bi bi-eye"></i> View</span></a>
-                                        <a href="#" id="btn_action_b"><span class="badge text-bg-info"><i class="bi bi-eyeglasses"></i> Action</span></a>
+
+                                        <?= form_open('validator/checkfile'); ?>
+                                        <?= form_hidden('bundel', 'bundelb'); ?>
+                                        <?= form_hidden('username', $bundel_b['username']); ?>
+                                        <?= form_hidden('no_perkara', $bundel_b['no_perkara']); ?>
+                                        <?= form_hidden('nama_file', $bundel_b['nama_file_b']); ?>
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Action</button>
+
                                     </td>
                                 </tr>
                                 <?php $num++; //tambah variabel num
@@ -74,8 +80,6 @@
                                     <td><?= $bundel_a['fullname']; ?></td>
                                     <td><?= $bundel_a['label_a']; ?></td>
                                     <td>
-                                        <a href="<?= base_url('uploads/') . $bundel_a['username'] . '/' . clear($bundel_a['no_perkara']) . '/' . 'bundela/' . $bundel_a['nama_file_a'] ?>" target="_blank" id="btn_view_a"><span class="badge text-bg-primary"><i class="bi bi-eye"></i> View</span></a>
-                                        <a href="#" id="btn_action_a"><span class="badge text-bg-info"><i class="bi bi-eyeglasses"></i> Action</span></a>
 
                                     </td>
                                 </tr>
@@ -117,7 +121,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-<script src="<?= base_url('assets/js/user_banding.js') ?>"></script>
+<script src="<?= base_url('assets/js/validator.js') ?>"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
 <?= $this->endSection() ?>

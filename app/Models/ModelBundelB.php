@@ -12,7 +12,7 @@ class ModelBundelB extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_perkara', 'nama_file_b', 'label_b', 'verval_status'];
+    protected $allowedFields    = ['id_perkara', 'nama_file_b', 'label_b', 'verval_status', 'komentar'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
