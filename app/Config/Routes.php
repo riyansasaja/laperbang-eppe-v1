@@ -16,9 +16,11 @@ $routes->group("verifikator", ['filter' => 'role:admin,verifikator'], function (
 
 $routes->group("validator", ['filter' => 'role:admin,validator'], function ($routes) {
     $routes->get('/', 'Validator::index');
+    $routes->get('hasvalidate', 'Validator::hasvalidate');
     // $routes->get('checkfile/(:any)/(:any)', 'Validator::checkFile/$1/$2');
     $routes->post('checkfile', 'Validator::checkFile');
     $routes->post('validate', 'Validator::validateFile');
+    $routes->post('cancel', 'Validator::revalid');
 });
 
 $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {

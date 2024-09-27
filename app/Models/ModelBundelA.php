@@ -60,8 +60,8 @@ class ModelBundelA extends Model
     function getDataValidate()
     {
         $db = $this->db->table($this->table);
-        $db->select('tb_bundel_a.label_a, tb_bundel_a.nama_file_a, tb_perkara.no_perkara, users.fullname, users.username');
-        $db->where('verval_status', '2');
+        $db->select('tb_bundel_a.label_a, tb_bundel_a.nama_file_a, tb_perkara.no_perkara, tb_bundel_a.verval_status ,users.fullname, users.username');
+        $db->where('verval_status !=', '1');
         $db->join('tb_perkara', 'tb_bundel_a.id_perkara = tb_perkara.id_perkara');
         $db->join('users', 'tb_perkara.id_user = users.id');
         return $db->get()->getResultArray();

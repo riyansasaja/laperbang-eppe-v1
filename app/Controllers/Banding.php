@@ -199,7 +199,7 @@ class Banding extends BaseController
                 return redirect()->to('/user/upload' . '/' . $id_perkara);
             }
             //notification whatsapp
-            notification($this->validatorphone, $label . ' untuk Perkara ' . $perkara->no_perkara . ' selesai diupload, siap *divalidasi*');
+            notification($this->validatorphone, $label . ' untuk Perkara ' . $perkara->no_perkara . ' selesai diupload, siap *DIVALIDASI*');
 
             $data = ['uploaded_fileinfo' => 'Lampiran Berhasil di Upload'];
             session()->setFlashdata('success', $data);
@@ -293,6 +293,10 @@ class Banding extends BaseController
                 session()->setFlashdata('error', $data);
                 return redirect()->to('/user/upload' . '/' . $id_perkara);
             }
+
+            //notification whatsapp
+            notification($this->validatorphone, $label . ' untuk Perkara ' . $perkara->no_perkara . ' selesai diupload, siap *DIVALIDASI*');
+
             $data = ['uploaded_fileinfo' => 'Lampiran Berhasil di Upload'];
             session()->setFlashdata('success', $data);
             return redirect()->to('/user/upload' . '/' . $id_perkara);
