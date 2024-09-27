@@ -74,7 +74,7 @@
                 <?= form_open_multipart('user/uploadb'); ?>
                 <?= form_hidden('id_perkara', $perkara->id_perkara) ?>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-4 mb-2">
 
                         <select class="form-select" name="label">
                             <option value="" selected>Pilih Yang Mau Diupload</option>
@@ -86,10 +86,10 @@
 
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto mb-2">
                         <input class="form-control" type="file" name="bundelb" accept="application/pdf">
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto mb-2">
                         <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-cloud-upload-fill"></i> Upload</button>
                     </div>
                 </div>
@@ -113,16 +113,20 @@
                                         <?php if ($bundel['verval_status'] == 1): ?>
                                             <td><span class="badge text-bg-secondary text-white">Uploaded</span></td>
                                         <?php elseif ($bundel['verval_status'] == 2) : ?>
-                                            <td><span class="badge text-bg-info text-white">Verified</span></td>
+                                            <td><span class="badge text-bg-info text-white">Validated</span></td>
                                         <?php elseif ($bundel['verval_status'] == 3) : ?>
-                                            <td><span class="badge text-bg-primary text-white">Validated</span></td>
+                                            <td><span class="badge text-bg-primary text-white">Verified</span></td>
                                         <?php else : ?>
                                             <td><span class="badge text-bg-danger text-white">Rejected</span></td>
                                         <?php endif; ?>
+                                        <td>
+                                            <?= $bundel['komentar']; ?>
+                                        </td>
 
                                         <td>
-                                            <a href="<?= base_url('user/delbundelb/') . $bundel['nama_file_b'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-danger">Delete</span></a>
+                                            <a href="<?= base_url('user/delbundelb/') . $bundel['nama_file_b'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-secondary"><i class="bi bi-trash"></i> Delete</span></a>
                                         </td>
+
                                     </tr>
                                 <?php endforeach; ?>
 
@@ -148,7 +152,7 @@
                 <?= form_open_multipart('user/uploada'); ?>
                 <?= form_hidden('id_perkara', $perkara->id_perkara) ?>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-4 mb-2">
 
                         <select class="form-select" name="label" id="label">
                             <option value="" selected>Pilih Yang Mau Diupload</option>
@@ -160,10 +164,10 @@
 
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto mb-2">
                         <input class="form-control" type="file" name="bundela" accept="application/pdf">
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto mb-2">
                         <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-cloud-upload-fill"></i> Upload</button>
                     </div>
                 </div>
@@ -187,16 +191,20 @@
                                         <?php if ($bundel['verval_status'] == 1): ?>
                                             <td><span class="badge text-bg-secondary text-white">Uploaded</span></td>
                                         <?php elseif ($bundel['verval_status'] == 2) : ?>
-                                            <td><span class="badge text-bg-info text-white">Verified</span></td>
+                                            <td><span class="badge text-bg-info text-white">Validated</span></td>
                                         <?php elseif ($bundel['verval_status'] == 3) : ?>
-                                            <td><span class="badge text-bg-primary text-white">Validated</span></td>
+                                            <td><span class="badge text-bg-primary text-white">Verified</span></td>
                                         <?php else : ?>
                                             <td><span class="badge text-bg-danger text-white">Rejected</span></td>
                                         <?php endif; ?>
+                                        <td>
+                                            <?= $bundel['komentar']; ?>
+                                        </td>
 
                                         <td>
-                                            <a href="<?= base_url('user/delbundela/') . $bundel['nama_file_a'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-danger">Delete</span></a>
+                                            <a href="<?= base_url('user/delbundela/') . $bundel['nama_file_a'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-secondary"><i class="bi bi-trash"></i> Delete</span></a>
                                         </td>
+
                                     </tr>
                                 <?php endforeach; ?>
 
