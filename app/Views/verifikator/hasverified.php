@@ -63,7 +63,7 @@
                                         <?php if ($bundel_b['verval_status'] == 3) : ?>
                                             <span class="badge  rounded-pill text-bg-info">Terverifikasi</span>
                                         <?php elseif ($bundel_b['verval_status'] == 5) : ?>
-                                            <span class="badge  rounded-pill text-bg-info">Ditolak</span>
+                                            <span class="badge  rounded-pill text-bg-danger">Ditolak</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>

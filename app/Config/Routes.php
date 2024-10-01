@@ -13,6 +13,9 @@ $routes->get('getstatus', 'ApilogStatus::find');
 $routes->group("verifikator", ['filter' => 'role:admin,verifikator'], function ($routes) {
     $routes->get('/', 'Verifikator::index');
     $routes->get('hasverified', 'Verifikator::hasverified');
+    $routes->post('checkfile', 'Verifikator::checkFile');
+    $routes->post('verified', 'Verifikator::verifiedFile');
+    $routes->post('cancel', 'Verifikator::reverif');
 });
 
 $routes->group("validator", ['filter' => 'role:admin,validator'], function ($routes) {

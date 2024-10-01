@@ -60,7 +60,7 @@
                                     <td><?= $bundel_b['label_b']; ?></td>
                                     <td>
 
-                                        <?= form_open('validator/checkfile'); ?>
+                                        <?= form_open('verifikator/checkfile'); ?>
                                         <?= form_hidden('bundel', 'bundelb'); ?>
                                         <?= form_hidden('username', $bundel_b['username']); ?>
                                         <?= form_hidden('no_perkara', $bundel_b['no_perkara']); ?>
@@ -80,7 +80,7 @@
                                     <td><?= $bundel_a['fullname']; ?></td>
                                     <td><?= $bundel_a['label_a']; ?></td>
                                     <td>
-                                        <?= form_open('validator/checkfile'); ?>
+                                        <?= form_open('verifikator/checkfile'); ?>
                                         <?= form_hidden('bundel', 'bundela'); ?>
                                         <?= form_hidden('username', $bundel_a['username']); ?>
                                         <?= form_hidden('no_perkara', $bundel_a['no_perkara']); ?>
