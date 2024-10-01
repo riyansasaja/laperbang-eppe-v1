@@ -46,4 +46,24 @@ class ModelPerkara extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete = ['auditDelete'];
+
+
+    public function getPerkarabanding()
+    {
+        $db = $this->db->table($this->table);
+        $db->select('tb_perkara.no_perkara, tb_perkara.jenis_perkara, tb_perkara.no_banding, tb_perkara.status, users.fullname');
+        $db->join('users', 'tb_perkara.id_user = users.id');
+        $db->orderBy('tb_perkara.id_perkara', 'DESC');
+        return $db->get()->getResultObject();
+    }
+
+    public function getdetilByNomor($nomor)
+    {
+        $db = $this->db->table($this->table);
+        $db->select('tb_perkara.no_perkara, tb_perkara.pihak_p, tb_perkara.pihak_t, tb_perkara.jenis_perkara, tb_perkara.no_banding, tb_perkara.status, users.fullname');
+        $db->where('tb_perkara.no_perkara', $nomor);
+        $db->join('users', 'tb_perkara.id_user = users.id');
+        $db->orderBy('tb_perkara.id_perkara', 'DESC');
+        return $db->get()->getResultObject();
+    }
 }

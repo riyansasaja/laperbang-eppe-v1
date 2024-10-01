@@ -41,6 +41,20 @@
                 </a>
             </li>
 
+        <?php elseif (in_groups('admin')) : ?>
+            <li class="nav-header">Banding</li>
+            <li class="nav-item">
+                <a href="<?= base_url('admin') ?>" class="nav-link"> <i class="bi bi-box-seam-fill"></i></i></i>
+                    <p>Banding Mangement</p>
+                </a>
+            </li>
+            <li class="nav-header">User Management</li>
+            <li class="nav-item">
+                <a href="<?= base_url('admin/users') ?>" class="nav-link"> <i class="bi bi-github"></i></i>
+                    <p>User Management</p>
+                </a>
+            </li>
+
         <?php endif; ?>
 
     </ul> <!--end::Sidebar Menu-->

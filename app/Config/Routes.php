@@ -38,3 +38,9 @@ $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {
     $routes->post('uploada', 'Banding::uploadBundelA');
     $routes->get('delbundela/(:any)/(:any)', 'Banding::delBundelA/$1/$2');
 });
+
+$routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
+    $routes->get('/', 'Admin::index');
+    $routes->get('users', 'Admin::users');
+    $routes->get('bandingdetil/(:any)', 'Admin::detilBanding/$1');
+});
