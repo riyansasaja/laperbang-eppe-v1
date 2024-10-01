@@ -30,10 +30,10 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="true" href="#">Belum Verifikasi</a>
+                        <a class="nav-link" href="<?= base_url('verifikator') ?>">Belum Verifikasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('verifikator/hasverified') ?>">Sudah Verifikasi</a>
+                        <a class="nav-link active" aria-current="true" href="#">Sudah Verifikasi</a>
                     </li>
                 </ul>
             </div>
@@ -46,6 +46,7 @@
                                 <th scope="col">Nomor Perkara</th>
                                 <th scope="col">PA Pengaju</th>
                                 <th scope="col">Jenis Berkas</th>
+                                <th scope="col">Status Verval</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -59,13 +60,18 @@
                                     <td><?= $bundel_b['fullname']; ?></td>
                                     <td><?= $bundel_b['label_b']; ?></td>
                                     <td>
+                                        <?php if ($bundel_b['verval_status'] == 3) : ?>
+                                            <span class="badge  rounded-pill text-bg-info">Terverifikasi</span>
+                                        <?php elseif ($bundel_b['verval_status'] == 5) : ?>
+                                            <span class="badge  rounded-pill text-bg-info">Ditolak</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
 
-                                        <?= form_open('validator/checkfile'); ?>
+                                        <?= form_open('verifikator/cancel'); ?>
                                         <?= form_hidden('bundel', 'bundelb'); ?>
-                                        <?= form_hidden('username', $bundel_b['username']); ?>
-                                        <?= form_hidden('no_perkara', $bundel_b['no_perkara']); ?>
                                         <?= form_hidden('nama_file', $bundel_b['nama_file_b']); ?>
-                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Action</button>
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Cancel Verfifikasi</button>
                                         <?= form_close(); ?>
                                     </td>
                                 </tr>
@@ -80,12 +86,19 @@
                                     <td><?= $bundel_a['fullname']; ?></td>
                                     <td><?= $bundel_a['label_a']; ?></td>
                                     <td>
-                                        <?= form_open('validator/checkfile'); ?>
+                                        <?php if ($bundel_a['verval_status'] == 2) : ?>
+                                            <span class="badge  rounded-pill text-bg-info">Tervalidasi</span>
+                                        <?php elseif ($bundel_a['verval_status'] == 3) : ?>
+                                            <span class="badge  rounded-pill text-bg-info">Terverifikasi</span>
+                                        <?php elseif ($bundel_a['verval_status'] == 4) : ?>
+                                            <span class="badge  rounded-pill text-bg-danger">Ditolak</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?= form_open('validator/cancel'); ?>
                                         <?= form_hidden('bundel', 'bundela'); ?>
-                                        <?= form_hidden('username', $bundel_a['username']); ?>
-                                        <?= form_hidden('no_perkara', $bundel_a['no_perkara']); ?>
                                         <?= form_hidden('nama_file', $bundel_a['nama_file_a']); ?>
-                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Action</button>
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Cancel Validasi</button>
                                         <?= form_close(); ?>
                                     </td>
                                 </tr>
