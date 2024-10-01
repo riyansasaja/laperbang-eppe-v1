@@ -59,7 +59,28 @@ class ModelBundelB extends Model
     {
         $db = $this->db->table($this->table);
         $db->select('tb_bundel_b.label_b, tb_bundel_b.nama_file_b, tb_perkara.no_perkara, tb_bundel_b.verval_status , users.fullname, users.username');
-        $db->where('verval_status !=', '1');
+        // $db->where('verval_status !=', '1');
+        $db->whereIn('verval_status', [2, 4]);
+        $db->join('tb_perkara', 'tb_bundel_b.id_perkara = tb_perkara.id_perkara');
+        $db->join('users', 'tb_perkara.id_user = users.id');
+        return $db->get()->getResultArray();
+    }
+    function getDataNonVerified()
+    {
+        $db = $this->db->table($this->table);
+        $db->select('tb_bundel_b.label_b, tb_bundel_b.nama_file_b, tb_perkara.no_perkara, users.fullname, users.username');
+        $db->where('verval_status', '2');
+        $db->join('tb_perkara', 'tb_bundel_b.id_perkara = tb_perkara.id_perkara');
+        $db->join('users', 'tb_perkara.id_user = users.id');
+        return $db->get()->getResultArray();
+    }
+
+    function getDataVerified()
+    {
+        $db = $this->db->table($this->table);
+        $db->select('tb_bundel_b.label_b, tb_bundel_b.nama_file_b, tb_perkara.no_perkara, users.fullname, users.username');
+        // $db->where('verval_status', '5');
+        $db->whereIn('verval_status', [3, 5]);
         $db->join('tb_perkara', 'tb_bundel_b.id_perkara = tb_perkara.id_perkara');
         $db->join('users', 'tb_perkara.id_user = users.id');
         return $db->get()->getResultArray();
