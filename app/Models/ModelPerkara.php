@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Tatter\Audits\Traits\AuditsTrait;
 
 class ModelPerkara extends Model
 {
+    use AuditsTrait;
+
     protected $table            = 'tb_perkara';
     protected $primaryKey       = 'id_perkara';
     protected $useAutoIncrement = true;
@@ -36,11 +39,11 @@ class ModelPerkara extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
-    protected $afterInsert    = [];
+    protected $afterInsert = ['auditInsert'];
     protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
+    protected $afterUpdate = ['auditUpdate'];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete = ['auditDelete'];
 }

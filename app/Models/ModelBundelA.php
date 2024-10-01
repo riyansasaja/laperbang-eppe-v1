@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Tatter\Audits\Traits\AuditsTrait;
 
 class ModelBundelA extends Model
 {
+
+    use AuditsTrait;
+
+
     protected $table            = 'tb_bundel_a';
     protected $primaryKey       = 'id_upload_a';
     protected $useAutoIncrement = true;
@@ -36,13 +41,14 @@ class ModelBundelA extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
-    protected $afterInsert    = [];
+    protected $afterInsert = ['auditInsert'];
     protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
+    protected $afterUpdate = ['auditUpdate'];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete = ['auditDelete'];
+
 
     //protected db
 

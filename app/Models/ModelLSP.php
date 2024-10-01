@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Tatter\Audits\Traits\AuditsTrait;
 
 class ModelLSP extends Model
 {
+    use AuditsTrait;
     protected $table            = 'log_status_perkara';
     protected $primaryKey       = 'id_status';
     protected $useAutoIncrement = true;
@@ -36,11 +38,11 @@ class ModelLSP extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
-    protected $afterInsert    = [];
+    protected $afterInsert = ['auditInsert'];
     protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
+    protected $afterUpdate = ['auditUpdate'];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete = ['auditDelete'];
 }

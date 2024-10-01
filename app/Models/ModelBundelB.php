@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Tatter\Audits\Traits\AuditsTrait;
 
 class ModelBundelB extends Model
 {
+    use AuditsTrait;
+
     protected $table            = 'tb_bundel_b';
     protected $primaryKey       = 'id_upload_b';
     protected $useAutoIncrement = true;
@@ -36,13 +39,13 @@ class ModelBundelB extends Model
     // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
-    protected $afterInsert    = [];
+    protected $afterInsert = ['auditInsert'];
     protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
+    protected $afterUpdate = ['auditUpdate'];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    protected $afterDelete = ['auditDelete'];
 
 
     function getDataNonValidate()
