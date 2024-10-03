@@ -23,6 +23,10 @@
 
 <?= $this->section('main') ?>
 
+<?php
+// dd($allPerkara); 
+?>
+
 <div class="row">
     <div class="col">
         <div class="card">
@@ -45,20 +49,17 @@
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($bandings as $b => $banding) : ?>
+                            <?php foreach ($allPerkara as $p => $perkara) : ?>
                                 <tr>
                                     <th scope="row"><?= $no; ?></th>
-                                    <td><?= $banding->no_perkara; ?></td>
-                                    <td><?= $banding->fullname; ?></td>
-                                    <td><?= $banding->no_banding; ?></td>
-                                    <td><?= $banding->status; ?></td>
+                                    <td><?= $perkara->no_perkara; ?></td>
+                                    <td><?= $perkara->fullname; ?></td>
+                                    <td><?= $perkara->no_banding; ?></td>
+                                    <td><?= $perkara->status; ?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/bandingdetil/') . clearlink($banding->no_perkara) ?>">Detil</a>
-                                        <a href="">Status</a>
-                                        <a href="">Hapus</a>
+                                        <a href="<?= base_url('admin/bandingdetil/') . clearlink($perkara->no_perkara) ?>"><i class="bi bi-arrow-up-right-square-fill"></i></a>
                                     </td>
                                 </tr>
-                                <?php $no++; ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

@@ -7,9 +7,12 @@ use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelPerkara;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\API\ResponseTrait;
 
 class Admin extends BaseController
 {
+    use ResponseTrait;
     //inisiasi model perkara, model bundel A, model bundelb
     private $modelPerkara;
     private $modelBundelA;
@@ -27,8 +30,7 @@ class Admin extends BaseController
 
     public function index()
     {
-        //ambil data perkara
-        $data['bandings'] = $this->modelPerkara->getPerkarabanding();
+        $data['allPerkara'] = $this->modelPerkara->getPerkarabanding();
         //return view admin, kirim data perkara
         return view('admin/banding', $data);
     }
@@ -38,13 +40,29 @@ class Admin extends BaseController
         return view('admin/users');
     }
 
+
+    public function getAllDataBanding()
+    {
+        $data = $this->modelPerkara->getPerkarabanding();
+        return $this->respond($data);
+    }
+
+
     //detilBanding
     public function detilBanding($no)
     {
         //get post nomor perkara
         $nomorperkara = decodelink($no);
         //getdetilbynomor
-        $data['detilPerkara'] = $this->modelPerkara->getdetilByNomor($nomorperkara);
-        dd($data);
+        $data['perkara'] = $this->modelPerkara->getdetilByNomor($nomorperkara);
+        //ambil id perkara
+        $detilperkara = $this->modelPerkara->where('no_perkara', $nomorperkara)->first();
+        $id_perkara = $detilperkara['id_perkara'];
+        //getbundelA by id perkara
+        $data['bundela'] = $this->modelBundelA->where('id_perkara', $id_perkara)->findAll();
+        //getbundelB by id perkara
+        $data['bundelb'] = $this->modelBundelB->where('id_perkara', $id_perkara)->findAll();
+        //kembalikan ke view admin detilbanding
+        return view('admin/detilbanding', $data);
     }
 }

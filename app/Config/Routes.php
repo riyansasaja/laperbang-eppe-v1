@@ -41,6 +41,7 @@ $routes->group("user", ['filter' => 'role:admin,user'], function ($routes) {
 
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('/', 'Admin::index');
+    $routes->get('getAllDataBanding', 'Admin::getAllDataBanding');
     $routes->get('users', 'Admin::users');
     $routes->get('bandingdetil/(:any)', 'Admin::detilBanding/$1');
 });
