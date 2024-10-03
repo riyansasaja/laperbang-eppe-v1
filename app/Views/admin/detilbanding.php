@@ -26,15 +26,14 @@
 
 
 <?php
-// dd($bundela);
+// dd($perkara);
 ?>
 
 
 <div class="row">
-    <div class="col-5">
+    <div class="col-md-5">
 
-
-        <div class="card"> <!-- menampilkan detail perkara -->
+        <div class="card mb-3"> <!-- menampilkan detail perkara -->
             <div class="card-header">
                 <span class="fs-4">Data Perkara</span>
             </div>
@@ -57,15 +56,65 @@
                 </table>
             </div>
         </div>
-
-
-
     </div>
+
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h4>Status Perkara <span class="badge text-bg-info"><?= $perkara->status; ?></span></h4>
+            </div>
+            <div class="card-body">
+                <?= form_open(); ?>
+                <div class=" row">
+                    <label for="disabledTextInput" class="form-label">Pilih Status Untuk Merubah Status Perkara</label>
+                    <div class="col-auto">
+                        <select class="form-select" aria-label="Default select example" id="staper" name="staper">
+                            <option selected value="none">Open this select menu</option>
+                            <option value="Pra Majelis">Pra Majelis</option>
+                            <option value="Pendaftaran Perkara">Pendaftaran Perkara</option>
+                            <option value="Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
+                            <option value="Penunjukan Panitera Pengganti">Penunjukan Panitera Pengganti</option>
+                            <option value="Pembuatan PHS 1">Pembuatan PHS 1</option>
+                            <option value="Pembuatan PHS Lanjutan">Pembuatan PHS Lanjutan</option>
+                            <option value="Sidang Lanjutan 1">Sidang Lanjutan 1</option>
+                            <option value="Sidang Lanjutan 2">Sidang Lanjutan 2</option>
+                            <option value="Sidang Lanjutan 3">Sidang Lanjutan 3</option>
+                            <option value="Sidang Lanjutan 4">Sidang Lanjutan 4</option>
+                            <option value="Sidang Lanjutan 5">Sidang Lanjutan 5</option>
+                            <option value="Penetapan Putusan">Penetapan Putusan</option>
+                            <option value="Pembacaan Putusan">Pembacaan Putusan</option>
+                            <option value="Minutasi">Minutasi</option>
+                            <option value="Pengiriman Salinan Putusan">Pengiriman Salinan Putusan</option>
+                        </select>
+                        <div id="staperHelp" class="form-text text-danger" hidden>Silahkan Pilih Status Perkara</div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" id="simpan" class="btn btn-info">Simpan</button>
+                    </div>
+                </div>
+                <?= form_close(); ?>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body">
+                <button>Buka Kunci Upload</button>
+                <button>Download ZIP</button>
+                <button>Delete Perkara</button>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <div class="row mt-3">
-    <div class="col-6">
-        <div class="card">
+    <div class="col-md-6">
+        <div class="card mb-3">
             <div class="card-header">
                 <span class="fs-5">Bundel B</span>
             </div>
@@ -106,7 +155,7 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <span class="fs-5">Bundle A</span>
@@ -150,10 +199,106 @@
 </div>
 
 
+
+<!-- ModalPramejelis -->
+<div class="modal fade" id="pramejelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Modal Pramajelis
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ModalPramejelis -->
+<div class="modal fade" id="mejelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Modal Pramajelis
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ppModal -->
+<div class="modal fade" id="ppModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Modal Pramajelis
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- daftarModal -->
+<div class="modal fade" id="daftarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Modal Pramajelis
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- putusanModal -->
+<div class="modal fade" id="putusanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Modal Pramajelis
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-<script src="<?= base_url('assets/js/banding_upload.js') ?>"></script>
+<script src="<?= base_url('assets/js/detilbanding.js') ?>"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
 <?= $this->endSection() ?>

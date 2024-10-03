@@ -6,9 +6,11 @@ use App\Controllers\BaseController;
 use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelPerkara;
+use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
+use Myth\Auth\Models\UserModel as ModelsUserModel;
 
 class Admin extends BaseController
 {
@@ -17,13 +19,19 @@ class Admin extends BaseController
     private $modelPerkara;
     private $modelBundelA;
     private $modelBundelB;
+    private $userModel;
+    public $authorize;
+    private $groupModel;
 
     //buat constructor
     public function __construct()
     {
+        $this->userModel = new UserModel();
         $this->modelPerkara = new ModelPerkara();
         $this->modelBundelA = new ModelBundelA();
         $this->modelBundelB = new ModelBundelB();
+        $this->authorize = service('authorization');
+        $this->groupModel = new \Myth\Auth\Models\GroupModel();;
     }
 
 
@@ -37,7 +45,14 @@ class Admin extends BaseController
 
     public function users()
     {
-        return view('admin/users');
+
+        // //mengambil seluruh data users lengkap dengan role
+        $data['users'] = $this->userModel->findAll();
+
+        // dd($data);
+        //kemudian dikirim ke view
+
+        return view('admin/users', $data);
     }
 
 
