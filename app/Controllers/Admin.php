@@ -11,6 +11,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Models\UserModel as ModelsUserModel;
+use Myth\Auth\Config\Auth as AuthConfig;
+use Myth\Auth\Entities\User;
 
 class Admin extends BaseController
 {
@@ -23,6 +25,20 @@ class Admin extends BaseController
     public $authorize;
     private $groupModel;
 
+    protected $auth;
+
+    /**
+     * @var AuthConfig
+     */
+    protected $config;
+
+    /**
+     * @var Session
+     */
+    protected $session;
+
+
+
     //buat constructor
     public function __construct()
     {
@@ -31,7 +47,12 @@ class Admin extends BaseController
         $this->modelBundelA = new ModelBundelA();
         $this->modelBundelB = new ModelBundelB();
         $this->authorize = service('authorization');
-        $this->groupModel = new \Myth\Auth\Models\GroupModel();;
+        $this->groupModel = new \Myth\Auth\Models\GroupModel();
+
+        $this->session = service('session');
+
+        $this->config = config('Auth');
+        $this->auth   = service('authentication');
     }
 
 
@@ -48,11 +69,76 @@ class Admin extends BaseController
 
         // //mengambil seluruh data users lengkap dengan role
         $data['users'] = $this->userModel->findAll();
-
         // dd($data);
         //kemudian dikirim ke view
 
         return view('admin/users', $data);
+    }
+
+    public function addUser()
+    {
+        $users = model(UserModel::class);
+
+        $rules = [
+            'email'    => 'required|valid_email|is_unique[users.email]',
+            'username' => 'required|alpha_numeric_space|min_length[3]|max_length[30]|is_unique[users.username]',
+            'fullname'     => 'required',
+            'nip'          => 'required|numeric',
+            'jabatan'      => 'required',
+            'phone'         => 'required'
+        ];
+
+
+        if (! $this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        $rules = [
+            'password'     => 'required',
+            'pass_confirm' => 'required|matches[password]',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        // Save the user
+        $allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
+        $user              = new User($this->request->getPost($allowedPostFields));
+
+        $this->config->requireActivation === null ? $user->activate() : $user->generateActivateHash();
+
+        // Ensure default group gets assigned if set
+        if (! empty($this->config->defaultUserGroup)) {
+            $users = $users->withGroup($this->config->defaultUserGroup);
+        }
+
+        if (! $users->save($user)) {
+            return redirect()->back()->withInput()->with('errors', $users->errors());
+        }
+
+        if ($this->config->requireActivation !== null) {
+            $activator = service('activator');
+            $sent      = $activator->send($user);
+
+            if (! $sent) {
+                return redirect()->back()->withInput()->with('error', $activator->error() ?? lang('Auth.unknownError'));
+            }
+
+            // Success!
+            return redirect()->route('admin/users')->with('message', 'User Berhasil diaktifkan');
+        }
+
+        // Success!
+        return redirect()->route('admin/users')->with('message', 'User Berhasil di Tambahkan');
+    }
+
+    public function detilUser($id)
+    {
+        //panggil data user by id
+        $data['user'] = $this->userModel->where('id', $id)->first();
+        //return ke view
+        return view('admin/detiluser', $data);
     }
 
 
