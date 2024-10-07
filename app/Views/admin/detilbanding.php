@@ -6,19 +6,17 @@
 
 <?= $this->section('breadcumb') ?>
 
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Detil Perkara Banding</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">admin</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Detil Banding</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
+<div class="col-sm-6">
+    <h1 class="m-0">Admin Banding</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">admin</a></li>
+        <li class="breadcrumb-item active">Detil Banding</a></li>
+    </ol>
+</div><!-- /.col -->
+
 
 <?= $this->endSection() ?>
 
@@ -33,7 +31,7 @@
 <div class="row">
     <div class="col-md-5">
 
-        <div class="card mb-3"> <!-- menampilkan detail perkara -->
+        <div class="card card-outline card-success mb-3"> <!-- menampilkan detail perkara -->
             <div class="card-header">
                 <span class="fs-4">Data Perkara</span>
             </div>
@@ -43,6 +41,10 @@
                         <tr>
                             <th class="col-4">Nomor Perkara</th>
                             <td id="noper"><?= $perkara->no_perkara ?></td>
+                        </tr>
+                        <tr>
+                            <th class="col-4">Nomor Banding</th>
+                            <td id="noper"><?= $perkara->no_banding ?></td>
                         </tr>
                         <tr>
                             <th class="col-4">Jenis Perkara</th>
@@ -59,47 +61,49 @@
     </div>
 
     <div class="col-md-5">
-        <div class="card">
+        <div class="card  card-outline card-warning">
             <div class="card-header">
                 <h4>Status Perkara <span class="badge text-bg-info"><?= $perkara->status; ?></span></h4>
             </div>
             <div class="card-body">
                 <?= form_open(); ?>
-                <div class=" row">
-                    <label for="disabledTextInput" class="form-label">Pilih Status Untuk Merubah Status Perkara</label>
+
+                <div class="form-row align-items-center">
                     <div class="col-auto">
-                        <select class="form-select" aria-label="Default select example" id="staper" name="staper">
-                            <option selected value="none">Open this select menu</option>
-                            <option value="Pra Majelis">Pra Majelis</option>
-                            <option value="Pendaftaran Perkara">Pendaftaran Perkara</option>
-                            <option value="Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
-                            <option value="Penunjukan Panitera Pengganti">Penunjukan Panitera Pengganti</option>
-                            <option value="Pembuatan PHS 1">Pembuatan PHS 1</option>
-                            <option value="Pembuatan PHS Lanjutan">Pembuatan PHS Lanjutan</option>
-                            <option value="Sidang Lanjutan 1">Sidang Lanjutan 1</option>
-                            <option value="Sidang Lanjutan 2">Sidang Lanjutan 2</option>
-                            <option value="Sidang Lanjutan 3">Sidang Lanjutan 3</option>
-                            <option value="Sidang Lanjutan 4">Sidang Lanjutan 4</option>
-                            <option value="Sidang Lanjutan 5">Sidang Lanjutan 5</option>
-                            <option value="Penetapan Putusan">Penetapan Putusan</option>
-                            <option value="Pembacaan Putusan">Pembacaan Putusan</option>
-                            <option value="Minutasi">Minutasi</option>
-                            <option value="Pengiriman Salinan Putusan">Pengiriman Salinan Putusan</option>
-                        </select>
-                        <div id="staperHelp" class="form-text text-danger" hidden>Silahkan Pilih Status Perkara</div>
+                        <label for="inlineFormInputName">Pilih Status Perkara</label>
                     </div>
                     <div class="col-auto">
-                        <button type="submit" id="simpan" class="btn btn-info">Simpan</button>
+                        <div class="input-group">
+                            <select class="form-control" aria-label="Default select example" id="staper" name="staper">
+                                <option selected value="none">Open this select menu</option>
+                                <option value="Pra Majelis">Pra Majelis</option>
+                                <option value="Pendaftaran Perkara">Pendaftaran Perkara</option>
+                                <option value="Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
+                                <option value="Penunjukan Panitera Pengganti">Penunjukan Panitera Pengganti</option>
+                                <option value="Pembuatan PHS 1">Pembuatan PHS 1</option>
+                                <option value="Pembuatan PHS Lanjutan">Pembuatan PHS Lanjutan</option>
+                                <option value="Sidang Lanjutan 1">Sidang Lanjutan 1</option>
+                                <option value="Sidang Lanjutan 2">Sidang Lanjutan 2</option>
+                                <option value="Sidang Lanjutan 3">Sidang Lanjutan 3</option>
+                                <option value="Sidang Lanjutan 4">Sidang Lanjutan 4</option>
+                                <option value="Sidang Lanjutan 5">Sidang Lanjutan 5</option>
+                                <option value="Penetapan Putusan">Penetapan Putusan</option>
+                                <option value="Pembacaan Putusan">Pembacaan Putusan</option>
+                                <option value="Minutasi">Minutasi</option>
+                                <option value="Pengiriman Salinan Putusan">Pengiriman Salinan Putusan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button id="simpan" type="submit" class="btn bg-indigo">Submit</button>
                     </div>
                 </div>
-                <?= form_close(); ?>
-
             </div>
         </div>
     </div>
 
     <div class="col-md-2">
-        <div class="card">
+        <div class="card card-outline card-dark">
             <div class="card-body">
                 <button>Buka Kunci Upload</button>
                 <button>Download ZIP</button>
@@ -115,7 +119,7 @@
 <div class="row mt-3">
     <div class="col-md-6">
         <div class="card mb-3">
-            <div class="card-header">
+            <div class="card-header bg-lightblue">
                 <span class="fs-5">Bundel B</span>
             </div>
             <div class="card-body">
@@ -157,7 +161,7 @@
 
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-purple">
                 <span class="fs-5">Bundle A</span>
             </div>
             <div class="card-body">
@@ -205,33 +209,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                Modal Pramajelis
+                ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ModalPramejelis -->
-<div class="modal fade" id="mejelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Majelis -->
+<div class="modal fade" id="majelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                Modal Pramajelis
+                ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
@@ -243,14 +251,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                Modal Pramajelis
+                ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
@@ -262,14 +272,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                Modal Pramajelis
+                ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
@@ -281,14 +293,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                Modal Pramajelis
+                ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
@@ -299,6 +313,4 @@
 
 <?= $this->section('pageScripts') ?>
 <script src="<?= base_url('assets/js/detilbanding.js') ?>"></script>
-<script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
 <?= $this->endSection() ?>

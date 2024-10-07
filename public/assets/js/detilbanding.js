@@ -1,13 +1,11 @@
 $(document).ready(function () {
 
-    const pramejelisModal = new bootstrap.Modal($('#pramejelisModal'))
-    const mejelisModal = new bootstrap.Modal($('#mejelisModal'))
-    const ppModal = new bootstrap.Modal($('#ppModal'))
-    const daftarModal = new bootstrap.Modal($('#daftarModal'))
-    const putusanModal = new bootstrap.Modal($('#putusanModal'))
+    console.log('ini tampilan');
     
     $('#simpan').on('click', function (e) {
         //ambil value dari select
+        e.preventDefault();
+        console.log('tombol simpan di klik');
         let selectVal = $('#staper').val();
 
         switch (selectVal) {
@@ -17,23 +15,23 @@ $(document).ready(function () {
                 break;
             case 'Pra Majelis':
                 e.preventDefault();
-                pramejelisModal.show()
+                $('#pramejelisModal').modal('show')
                 break;
             case 'Penunjukan Majelis Hakim':
                 e.preventDefault();
-                mejelisModal.show()
+                $('#mejelisModal').modal('show')
                 break;
             case 'Pendaftaran Perkara':
                 e.preventDefault();
-                daftarModal.show()
+                $('#daftarModal').modal('show')
                 break;
             case 'Penunjukan Panitera Pengganti':
                 e.preventDefault();
-                ppModal.show()
+                $('#ppModal').modal('show')
                 break;
             case 'Pengiriman Salinan Putusan':
                 e.preventDefault();
-                putusanModal.show()
+                $('#putusanModal').modal('show')
                 break;
         
             default:
@@ -80,19 +78,6 @@ $(document).ready(function () {
         }
       });
     }
-
-    //function untuk simpan data pramajelis
-
-    //function untuk simpan data nomor perkara
-
-
-    //function untuk simpan Panitera Pengganti
-
-
-
-
-
-
 
     function cetakData(value, jenis) {
         console.log(value)

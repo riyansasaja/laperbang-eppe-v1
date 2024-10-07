@@ -6,18 +6,15 @@
 
 <?= $this->section('breadcumb') ?>
 
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Admin Banding</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Admin</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
+<div class="col-sm-6">
+    <h1 class="m-0">Admin Banding</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item active">Admin</a></li>
+    </ol>
+</div><!-- /.col -->
 
 <?= $this->endSection() ?>
 
@@ -29,7 +26,7 @@
 
 <div class="row">
     <div class="col">
-        <div class="card">
+        <div class="card card-secondary">
             <div class="card-header">
                 <h5>List Users</h5>
             </div>
@@ -57,7 +54,7 @@
                                     <td><?= $perkara->no_banding; ?></td>
                                     <td><?= $perkara->status; ?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/bandingdetil/') . clearlink($perkara->no_perkara) ?>"><i class="bi bi-arrow-up-right-square-fill"></i></a>
+                                        <a href="<?= base_url('admin/bandingdetil/') . clearlink($perkara->no_perkara) ?>"><i class="fas fa-arrow-circle-right"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

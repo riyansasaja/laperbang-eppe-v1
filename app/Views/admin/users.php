@@ -6,20 +6,16 @@
 
 <?= $this->section('breadcumb') ?>
 
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Users Management</h3>
-        <?= view('App\Views\Auth\_message_block') ?>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Admin</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Users Management</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
+<div class="col-sm-6">
+    <h1 class="m-0">User Management</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">admin</a></li>
+        <li class="breadcrumb-item active">Users Management</a></li>
+    </ol>
+</div><!-- /.col -->
 
 <?= $this->endSection() ?>
 
