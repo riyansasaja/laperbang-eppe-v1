@@ -1,7 +1,4 @@
-$(document).ready(function () {
-
-    console.log('ini tampilan');
-    
+$(document).ready(function () {    
     $('#simpan').on('click', function (e) {
         //ambil value dari select
         e.preventDefault();

@@ -122,7 +122,7 @@ class Auth extends \Myth\Auth\Config\Auth
      *
      * @var string[]
      */
-    public $personalFields = ['fullname', 'nip', 'jabatan'];
+    public $personalFields = ['fullname', 'nip', 'jabatan', 'phone'];
 
     /**
      * --------------------------------------------------------------------

@@ -40,7 +40,7 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
                             <span class="fs-1">Users List</span>
                         </div>
                         <div class="float-end">
-                            <button class="btn btn-primary float-end mt-1" data-bs-toggle="modal" data-bs-target="#adduserModal">+ Tambah User</button>
+                            <button class="btn btn-primary float-end mt-1" data-toggle="modal" data-target="#adduserModal">+ Tambah User</button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
                                         ?>
                                     </td>
                                     <td> <a href="<?= base_url('admin/detiluser/') . $user->id ?>">
-                                            <i class="bi bi-arrow-up-right-square-fill"></i>
+                                            <i class="fas fa-sort-up"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -92,12 +92,17 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
 
 
 <!-- Modal Add User-->
+
+
+<!-- Modal -->
 <div class="modal fade" id="adduserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <!-- form add user -->
@@ -133,7 +138,7 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
                 <div class="mb-3 row">
                     <label for="inputJabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" name="jabatan">
+                        <select class="form-control" aria-label="Default select example" name="jabatan">
                             <option selected value="">Open this select menu</option>
                             <option value="Admin">Admin</option>
                             <option value="Operator">Operator</option>
@@ -170,11 +175,12 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
                 <button type="submit" class="btn btn-primary">Save changes</button>
                 <?php form_close(); ?>
                 <!-- end form -->
-
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 <?= $this->endSection() ?>

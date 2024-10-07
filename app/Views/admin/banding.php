@@ -57,6 +57,7 @@
                                         <a href="<?= base_url('admin/bandingdetil/') . clearlink($perkara->no_perkara) ?>"><i class="fas fa-arrow-circle-right"></i></a>
                                     </td>
                                 </tr>
+                                <?php $no++; ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
