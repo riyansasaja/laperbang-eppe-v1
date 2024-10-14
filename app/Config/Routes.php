@@ -47,4 +47,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
 
     $routes->post('adduser', 'Admin::addUser');
     $routes->get('bandingdetil/(:any)', 'Admin::detilBanding/$1');
+
+    $routes->get('majelis', 'Admin::majelisBanding');
+    $routes->post('setmajelis', 'Admin::setMajelis');
+    $routes->get('delmajelis/(:num)', 'Admin::delMajelis/$1');
 });

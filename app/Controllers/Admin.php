@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MajelisModel;
 use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelPerkara;
@@ -56,7 +57,7 @@ class Admin extends BaseController
     }
 
 
-
+    //===============
     public function index()
     {
         $data['allPerkara'] = $this->modelPerkara->getPerkarabanding();
@@ -64,6 +65,7 @@ class Admin extends BaseController
         return view('admin/banding', $data);
     }
 
+    //===============
     public function users()
     {
 
@@ -75,6 +77,7 @@ class Admin extends BaseController
         return view('admin/users', $data);
     }
 
+    //===============
     public function addUser()
     {
         $users = model(UserModel::class);
@@ -134,6 +137,7 @@ class Admin extends BaseController
         return redirect()->route('admin/users')->with('message', 'User Berhasil di Tambahkan');
     }
 
+    //===============
     public function detilUser($id)
     {
         //panggil data user by id
@@ -142,7 +146,7 @@ class Admin extends BaseController
         return view('admin/detiluser', $data);
     }
 
-
+    //===============
     public function getAllDataBanding()
     {
         $data = $this->modelPerkara->getPerkarabanding();
@@ -166,5 +170,51 @@ class Admin extends BaseController
         $data['bundelb'] = $this->modelBundelB->where('id_perkara', $id_perkara)->findAll();
         //kembalikan ke view admin detilbanding
         return view('admin/detilbanding', $data);
+    }
+
+    public function majelisBanding()
+    {
+        $modelMajelis = new MajelisModel();
+        $data['allmajelis'] = $modelMajelis->select('tb_majelis.*, users.fullname')
+            ->join('users', 'tb_majelis.id_user = users.id')
+            ->findAll();
+        $data['userHakim'] = $this->userModel->select('id, fullname')->where('jabatan', 'Hakim')->findAll();
+        return view('admin/majelisbanding', $data);
+    }
+
+    public function setMajelis()
+    {
+
+        //Panggil Modal Majelis
+        $modalMajelis = new MajelisModel();
+        //validation
+        if (!$this->validate(
+            [
+                'id_user' => 'required',
+                'majelis' => 'required'
+            ]
+        )) {
+            # ambil validation
+            $validation = \Config\Services::validation();
+            #kembalikan validation
+            return redirect()->back()->withInput('validation', $validation);
+        }
+        #jika lolos validation
+        $data = [
+            'id_user' => $this->request->getVar('id_user'),
+            'majelis' => $this->request->getVar('majelis')
+        ];
+        $modalMajelis->insert($data);
+        return redirect()->back();
+    }
+
+    public function delMajelis($id)
+    {
+        //Panggil Modal Majelis
+        $modalMajelis = new MajelisModel();
+        //jalankan perintah delete
+        $modalMajelis->delete($id);
+        //return back
+        return redirect()->back();
     }
 }
