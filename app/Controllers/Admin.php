@@ -14,6 +14,7 @@ use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Models\UserModel as ModelsUserModel;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
+use Myth\Auth\Models\GroupModel;
 
 class Admin extends BaseController
 {
@@ -142,9 +143,14 @@ class Admin extends BaseController
     //===============
     public function detilUser($id)
     {
+        $authorize = $auth = service('authorization');
+        //panggil model group
+        $modelGroup = new GroupModel();
         //panggil data user by id
         $data['user'] = $this->userModel->where('id', $id)->first();
         //return ke view
+        $data['getRoles'] = $modelGroup->getGroupsForUser($id);
+        $data['allRoles'] = $authorize->groups();
         return view('admin/detiluser', $data);
     }
 
@@ -218,6 +224,35 @@ class Admin extends BaseController
         //jalankan perintah delete
         $modalMajelis->delete($id);
         //return back
+        session()->setFlashdata('success', 'Data berhasil dihapus');
+        return redirect()->back();
+    }
+
+    public function addRoles()
+    {
+        $rules = [
+            'user_id' => 'required',
+            'group_id' => 'required'
+        ];
+
+        // cek validasi
+        if (! $this->validate($rules)) {
+            # Kembalikan swal
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput();
+        }
+
+        //jika lolos ambil data inputan
+        $data = $this->validator->getValidated();
+        //set group di myth auth
+        $this->groupModel->addUserToGroup($data['user_id'], $data['group_id']);
+        session()->setFlashdata('success', 'Data berhasil ditambahkan');
+        return redirect()->back();
+    }
+
+    public function delRole($user_id, $group_id)
+    {
+        $this->groupModel->removeUserFromGroup($user_id, $group_id);
         session()->setFlashdata('success', 'Data berhasil dihapus');
         return redirect()->back();
     }

@@ -98,8 +98,8 @@
                             <i class="fas fa-envelope mr-2"></i> Profile
                         </a>
 
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Logout
+                        <a href="<?= base_url('logout') ?>" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
 
                 </li>
