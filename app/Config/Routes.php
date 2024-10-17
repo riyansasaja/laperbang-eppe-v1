@@ -51,4 +51,5 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('delmajelis/(:num)', 'Admin::delMajelis/$1');
     $routes->post('addroles', 'Admin::addRoles');
     $routes->get('delrole/(:num)/(:num)', 'Admin::delRole/$1/$2');
+    $routes->post('edituser', 'Admin::editUser');
 });

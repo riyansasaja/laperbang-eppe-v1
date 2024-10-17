@@ -220,49 +220,58 @@
                     <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" method="POST" action="<?= base_url('admin/edituser') ?>">
+                            <?= csrf_field() ?>
+                            <?= form_hidden('id', $user->id); ?>
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Nama Lengkap" value="<?= $user->fullname ?>" name="fullname">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?= $user->email ?>" name="email">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                                    <input type="text" class="form-control" id="inputUsername" placeholder="Username" value="<?= $user->username ?>" name="username">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                                <label for="inputNip" class="col-sm-2 col-form-label">NIP</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                    <input type="text" class="form-control" id="inputNip" placeholder="19xxxxxxx" value="<?= $user->nip ?>" name="nip">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+                                <label for="inputJabatan" class="col-sm-2 col-form-label">Jabatan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                                    <input type="text" class="form-control" id="inputJabatan" placeholder="Jabatan" value="<?= $user->jabatan ?>" name="jabatan">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="inputPhone" class="col-sm-2 col-form-label">Nomor Telpon</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPhone" placeholder="0823xxx" value="<?= $user->phone ?>" name="phone">
+                                </div>
+                            </div>
+
+
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                    <button type="submit" class="btn btn-danger" name="update">Update</button>
+                                    <button type="submit" class="btn btn-danger" name="reset_password" onclick="return confirm('Yakin Mereset Password?')">ResetPassword</button>
+                                    <?php if ($user->active == 0) : ?>
+                                        <button type="submit" class="btn btn-danger" name="active">Active</button>
+                                    <?php else : ?>
+                                        <button type="submit" class="btn btn-danger" name="inactive">Inactive</button>
+                                    <?php endif; ?>
+                                    <button type="submit" class="btn btn-danger" name="delete" onclick="return confirm('Yakin Menghapus?')">Delete User</button>
+
                                 </div>
                             </div>
                         </form>

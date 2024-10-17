@@ -15,6 +15,7 @@ use Myth\Auth\Models\UserModel as ModelsUserModel;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\GroupModel;
+use Myth\Auth\Password;
 
 class Admin extends BaseController
 {
@@ -255,5 +256,106 @@ class Admin extends BaseController
         $this->groupModel->removeUserFromGroup($user_id, $group_id);
         session()->setFlashdata('success', 'Data berhasil dihapus');
         return redirect()->back();
+    }
+
+    public function editUser()
+    {
+        $id = $this->request->getPost('id');
+        $user = $this->userModel->find($id);
+
+        if (isset($_POST['update'])) {
+            #update user
+            $userdata = [
+                'email' => $this->request->getPost('email'),
+                'username' => $this->request->getPost('username'),
+                'fullname' => $this->request->getPost('fullname'),
+                'nip' => $this->request->getPost('nip'),
+                'jabatan' => $this->request->getPost('jabatan'),
+                'phone' => $this->request->getPost('phone'),
+            ];
+
+            $rules  = [
+                'email'    => 'required|valid_email',
+                'username' => 'required|min_length[3]|max_length[30]',
+                'fullname'     => 'required',
+                'nip'          => 'required|numeric',
+                'jabatan'      => 'required',
+                'phone'         => 'required'
+            ];
+            if (! $this->validateData($userdata, $rules)) {
+                session()->setFlashdata('error', $this->validator->getErrors());
+                return redirect()->back()->withInput();
+                die;
+            }
+            //update user data
+
+            $user->email = $userdata['email'];
+            $user->username = $userdata['username'];
+            $user->fullname = $userdata['fullname'];
+            $user->nip = $userdata['nip'];
+            $user->jabatan = $userdata['jabatan'];
+            $user->phone = $userdata['phone'];
+
+
+            if ($this->userModel->save($user)) {
+                session()->setFlashdata('success', 'Data Berhasil di Update');
+                return redirect()->back();
+            } else {
+                session()->setFlashdata('error', 'Data gagal di Update');
+                return redirect()->back();
+            }
+
+            die;
+        }
+
+        if (isset($_POST['active'])) {
+            # code...
+            $user->active = 1;
+            if ($this->userModel->save($user)) {
+                session()->setFlashdata('success', 'User berhasil diaktivkan');
+                return redirect()->back();
+            } else {
+                session()->setFlashdata('error', 'User gagal diaktivkan');
+                return redirect()->back();
+            }
+        }
+        if (isset($_POST['inactive'])) {
+            # code...
+            $user->active = 0;
+            if ($this->userModel->save($user)) {
+                session()->setFlashdata('success', 'User berhasil di non aktivkan');
+                return redirect()->back();
+            } else {
+                session()->setFlashdata('success', 'User gagal di non aktivkan');
+                return redirect()->back();
+            }
+        }
+
+        if (isset($_POST['delete'])) {
+            # code...
+            if ($this->userModel->delete($id)) {
+                session()->setFlashdata('success', 'User Berhasil di Delete');
+                return redirect()->route('admin/users');
+            } else {
+                session()->setFlashdata('error', 'User gagal di Delete');
+                return redirect()->back();
+            }
+        }
+
+        if (isset($_POST['reset_password'])) {
+            # tentukan password default
+            $password = 'Laperbang@12345';
+            //ambil data
+            $data = [
+                'password_hash' => Password::hash($password), //dari controller password mythauth
+                'reset_hash' => null,
+                'reset_at' => null,
+                'reset_expires' => null,
+            ];
+
+            $this->userModel->update($id, $data); //update data
+            session()->setFlashdata('success', "Password berhasil di reset ke - Laperbang@12345 -"); //swal
+            return redirect()->back();
+        }
     }
 }
