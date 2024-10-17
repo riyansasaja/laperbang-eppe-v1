@@ -94,7 +94,8 @@ class Admin extends BaseController
 
 
         if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back();
         }
 
         $rules = [
@@ -103,7 +104,8 @@ class Admin extends BaseController
         ];
 
         if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->to('admin/users');
         }
 
         // Save the user
@@ -118,7 +120,8 @@ class Admin extends BaseController
         }
 
         if (! $users->save($user)) {
-            return redirect()->back()->withInput()->with('errors', $users->errors());
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->to('admin/users');
         }
 
         if ($this->config->requireActivation !== null) {
@@ -126,15 +129,14 @@ class Admin extends BaseController
             $sent      = $activator->send($user);
 
             if (! $sent) {
-                return redirect()->back()->withInput()->with('error', $activator->error() ?? lang('Auth.unknownError'));
+                session()->setFlashdata('error', $activator->error() ?? lang('Auth.unknownError'));
+                return redirect()->to('admin/users');
             }
-
-            // Success!
-            return redirect()->route('admin/users')->with('message', 'User Berhasil diaktifkan');
         }
 
         // Success!
-        return redirect()->route('admin/users')->with('message', 'User Berhasil di Tambahkan');
+        session()->setFlashdata('success', 'User Berhasil ditambahkan');
+        return redirect()->to('admin/users');
     }
 
     //===============
@@ -205,6 +207,7 @@ class Admin extends BaseController
             'majelis' => $this->request->getVar('majelis')
         ];
         $modalMajelis->insert($data);
+        session()->setFlashdata('success', 'Data berhasil ditambahkan');
         return redirect()->back();
     }
 
@@ -215,6 +218,7 @@ class Admin extends BaseController
         //jalankan perintah delete
         $modalMajelis->delete($id);
         //return back
+        session()->setFlashdata('success', 'Data berhasil dihapus');
         return redirect()->back();
     }
 }

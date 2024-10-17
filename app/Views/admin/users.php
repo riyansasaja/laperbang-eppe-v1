@@ -171,7 +171,7 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
                         <input type="password" class="form-control" id="inputRepeatPassword" name="pass_confirm">
                     </div>
                 </div>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
                 <?php form_close(); ?>
                 <!-- end form -->

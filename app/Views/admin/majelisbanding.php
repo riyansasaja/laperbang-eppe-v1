@@ -116,7 +116,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-<script src="<?= base_url('assets/js/usermanagement.js') ?>"></script>
+<script src="<?= base_url('assets/js/majelisbanding.js') ?>"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
 <?= $this->endSection() ?>
