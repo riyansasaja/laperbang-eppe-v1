@@ -78,6 +78,7 @@ class Banding extends BaseController
             'hp_pihak_p'        =>  'required|numeric',
             'hp_pihak_t'        =>  'required|numeric',
             'jenis_perkara'     =>  'required',
+            'status'            =>  'required'
 
         ];
 

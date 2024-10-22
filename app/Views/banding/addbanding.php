@@ -31,6 +31,7 @@
                 <!-- form add perkara -->
                 <?= form_open('user/addbanding') ?>
                 <?= form_hidden('id_user', user()->id) ?>
+                <?= form_hidden('status', 'Input Perkara'); ?>
                 <div class="row mb-3">
                     <label for="no_perkara" class="col-sm-2 col-form-label">Nomor Perkara</label>
                     <div class="col-sm-10">

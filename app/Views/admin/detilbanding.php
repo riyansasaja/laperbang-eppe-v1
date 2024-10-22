@@ -24,7 +24,7 @@
 
 
 <?php
-// dd($perkara);
+// dd($status_perkara);
 ?>
 
 
@@ -98,6 +98,26 @@
                         <button id="simpan" type="submit" class="btn bg-indigo">Submit</button>
                     </div>
                 </div>
+                <?= form_close(); ?>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>STATUS</th>
+                            <th>DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($status_perkara as $key => $status) : ?>
+                            <tr>
+                                <td><?= $status['status']; ?></td>
+                                <td><?= $status['tgl_status']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>
@@ -214,13 +234,28 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <!-- form kirim perkara -->
+            <?= form_open('admin/setpramajelis'); ?>
+            <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
             <div class="modal-body">
-                ...
+                <div class="form-group">
+                    <label for="pramajelisselect">Pilih Majelis</label>
+                    <select class="form-control" id="pramajelisselect" name="nama_majelis">
+                        <option value="">Pilih Salah Satu</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                        <option value="C3">C3</option>
+                    </select>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+            <?= form_close(); ?>
         </div>
     </div>
 </div>

@@ -6,7 +6,9 @@ use App\Controllers\BaseController;
 use App\Models\MajelisModel;
 use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
+use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
+use App\Models\PramajelisModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
@@ -27,6 +29,8 @@ class Admin extends BaseController
     private $userModel;
     public $authorize;
     private $groupModel;
+    private $validation;
+    private $lspModel;
 
     protected $auth;
 
@@ -46,16 +50,16 @@ class Admin extends BaseController
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->lspModel = new ModelLSP();
         $this->modelPerkara = new ModelPerkara();
         $this->modelBundelA = new ModelBundelA();
         $this->modelBundelB = new ModelBundelB();
         $this->authorize = service('authorization');
         $this->groupModel = new \Myth\Auth\Models\GroupModel();
-
         $this->session = service('session');
-
         $this->config = config('Auth');
         $this->auth   = service('authentication');
+        $this->validation = service('validation');
     }
 
 
@@ -177,6 +181,8 @@ class Admin extends BaseController
         $data['bundela'] = $this->modelBundelA->where('id_perkara', $id_perkara)->findAll();
         //getbundelB by id perkara
         $data['bundelb'] = $this->modelBundelB->where('id_perkara', $id_perkara)->findAll();
+        //getstatus perkara
+        $data['status_perkara'] = $this->lspModel->where('nomor', $nomorperkara)->findAll();
         //kembalikan ke view admin detilbanding
         return view('admin/detilbanding', $data);
     }
@@ -357,5 +363,84 @@ class Admin extends BaseController
             session()->setFlashdata('success', "Password berhasil di reset ke - Laperbang@12345 -"); //swal
             return redirect()->back();
         }
+    }
+
+    ###### Data SetPramajelis lama ###########
+    // public function setPramajelis()
+    // {
+    //     $pramajelisModel = new PramajelisModel();
+    //     //buat rules
+    //     $rules = [
+    //         'no_perkara' => 'required',
+    //         'nama_majelis' => 'required'
+    //     ];
+    //     //cek error
+    //     if (! $this->validate($rules)) {
+    //         session()->setFlashdata('error', $this->validator->getErrors());
+    //         return redirect()->back()->withInput();
+    //     }
+
+    //     //ambil data
+    //     $validation = service('validation');
+    //     $validData = $validation->getValidated();
+    //     //ambil data id_perkara
+    //     $perkara = $this->modelPerkara->select('id_perkara')->where('no_perkara', $validData['no_perkara'])->first();
+    //     $datapramajelis = [
+    //         'id_perkara' => $perkara['id_perkara'],
+    //         'nama_majelis' => $validData['nama_majelis']
+    //     ];
+    //     $datalsp = [
+    //         'tgl_status' => date('Y-m-d'),
+    //         'nomor' => $validData['no_perkara'],
+    //         'status' => 'Penetapan Pramajelis'
+    //     ];
+
+    //     //insert ke table pramajelis
+    //     $pramajelisModel->insert($datapramajelis);
+    //     //insert ke table log status perkara
+    //     $this->lspModel->insert($datalsp);
+    //     //Pemberitahuan Whatsapp ke pihak
+
+    //     //session alert
+    //     session()->setFlashdata('success', 'Data Pramejelis Berhasil di pilih');
+    //     //kembali tampilan
+    //     return redirect()->back();
+    // }
+    ########### end Pramajelis Lama
+
+
+    public function setPramajelis()
+    {
+        //form Validation Rules
+        $rules = [
+            'no_perkara' => 'required',
+            'nama_majelis' => 'required'
+        ];
+
+        //cek error
+        if (! $this->validate($rules)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput();
+        }
+
+        //ambil data
+        $validation = service('validation');
+        $validData = $validation->getValidated();
+        //ambil data perkara di tb_perkara
+        $perkara = $this->modelPerkara->select('id_perkara')->where('no_perkara', $validData['no_perkara'])->first();
+        //ambil id Perkara
+        $id_perkara = $perkara['id_perkara'];
+        //data update
+        $update_perkara = [
+            'status' => 'Penetapan Pra Majelis',
+            'majelis' => $validData['nama_majelis']
+        ];
+        //Update Data di Table Perkara
+        $this->modelPerkara->update($id_perkara, $update_perkara);
+        //Pemberitahuan Whatsapp
+        //Pemberitahuan Swal
+        session()->setFlashdata('success', 'Data Pramejelis Berhasil di pilih');
+        //Return Back
+        return redirect()->back();
     }
 }

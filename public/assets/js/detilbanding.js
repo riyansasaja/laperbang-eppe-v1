@@ -48,38 +48,21 @@ $(document).ready(function () {
     }
 
 
-    //async function untuk pramajelis
-    async function majelis (jenis) {
-    const { value: val } = await Swal.fire({
-        title: "Silahkan pilih Majelis",
-        input: "select",
-        inputOptions: {
-          //pilihan majelis
-          majelis_a: "Majelis A",
-          majelis_b: "Majelis B",
-          majelis_c: "Majelis C"
-
-        },
-        inputPlaceholder: "Pilih Majelis",
-        showCancelButton: true,
-        //validator
-        inputValidator: (value) => {
-          return new Promise((resolve) => {
-            if (value === "") {
-                resolve("You need to select oranges :)");
-            } else {
-                //jika benar memilih jalankan fungis cetakData, nanti ganti dengan fungsi saveMajelis
-              return cetakData(value, jenis);
-            }
+    //fungsi untuk menampilkan alert dari session php
+    if (error) {
+        Swal.fire({
+            title: "Error",
+            text: error,
+            icon: "error"
           });
-        }
-      });
     }
 
-    function cetakData(value, jenis) {
-        console.log(value)
-        console.log(jenis)
-        Swal.close()
+    if (success) {
+        Swal.fire({
+            title: "Success",
+            text: success,
+            icon: "success"
+          });        
     }
 
 
