@@ -516,10 +516,17 @@ class Admin extends BaseController
 
     public function setPaniteraPengganti()
     {
+
         $rules = [
             'no_perkara' => 'required',
-            'id_pp' => 'required|numeric'
+            'id_pp' => 'required'
         ];
+
+        //cek error
+        if (! $this->validate($rules)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput();
+        }
         $validData = $this->validation->getValidated();
         //ambil data perkara di tb_perkara
         $perkara = $this->modelPerkara->getidByNomor($validData['no_perkara']);
@@ -530,6 +537,36 @@ class Admin extends BaseController
             'status' => 'Penunjukan Panitera Pengganti',
             'id_pp' => $validData['id_pp'],
         ];
+        //update database
+        $this->modelPerkara->update($id_perkara, $data_update);
+        //Pemberitahuan Swal
+        session()->setFlashdata('success', 'Data Status Berhasil di Rubah');
+        //Return Back
+        return redirect()->back();
+    }
+
+    public function setStatusEtc()
+    {
+        $rules = [
+            'no_perkara' => 'required',
+            'staper' => 'required'
+        ];
+
+        if (! $this->validate($rules)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput();
+        }
+        $validData = $this->validation->getValidated();
+        //ambil data perkara di tb_perkara
+        $perkara = $this->modelPerkara->getidByNomor($validData['no_perkara']);
+        //ambil id Perkara
+        $id_perkara = $perkara->id_perkara;
+        //$data update
+        $data_update = [
+            'status' => $validData['staper'],
+        ];
+        //update database
+        $this->modelPerkara->update($id_perkara, $data_update);
         //Pemberitahuan Swal
         session()->setFlashdata('success', 'Data Status Berhasil di Rubah');
         //Return Back

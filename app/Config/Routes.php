@@ -56,4 +56,5 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->post('setnoper', 'Admin::setNoper');
     $routes->post('setmajelissidang', 'Admin::setMajelisSidang');
     $routes->post('setpp', 'Admin::setPaniteraPengganti');
+    $routes->post('set_status', 'Admin::setStatusEtc');
 });

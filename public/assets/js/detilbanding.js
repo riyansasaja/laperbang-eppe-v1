@@ -1,7 +1,7 @@
 $(document).ready(function () {    
     $('#simpan').on('click', function (e) {
         //ambil value dari select
-        e.preventDefault();
+        // e.preventDefault();
         console.log('tombol simpan di klik');
         let selectVal = $('#staper').val();
 

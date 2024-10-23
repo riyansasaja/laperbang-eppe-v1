@@ -15,7 +15,7 @@ class ModelPerkara extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'no_perkara', 'pihak_p', 'pihak_t', 'hp_pihak_p', 'hp_pihak_t', 'jenis_perkara', 'no_banding', 'tgl_reg_banding', 'status', 'majelis'];
+    protected $allowedFields    = ['id_user', 'no_perkara', 'pihak_p', 'pihak_t', 'hp_pihak_p', 'hp_pihak_t', 'jenis_perkara', 'no_banding', 'tgl_reg_banding', 'status', 'majelis', 'id_pp'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

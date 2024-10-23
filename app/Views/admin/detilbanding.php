@@ -66,7 +66,8 @@
                 <h4>Status Perkara <span class="badge text-bg-info"><?= $perkara->status; ?></span></h4>
             </div>
             <div class="card-body">
-                <?= form_open(); ?>
+                <?= form_open('admin/set_status'); ?>
+                <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
 
                 <div class="form-row align-items-center">
                     <div class="col-auto">
@@ -317,7 +318,7 @@
                         <!-- ambil data panitera pengganti -->
                         <option value="" selected>Pilih Panitera Pengganti</option>
                         <?php foreach ($paniteras as $pp): ?>
-                            <option value="<?= $pp['id'] ?>"><?= $pp['fullname'] ?></option>
+                            <option value="<?= $pp->id ?>"><?= $pp->fullname ?></option>
                         <?php endforeach; ?>
 
                     </select>
@@ -325,7 +326,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
             <?= form_close(); ?>
         </div>
