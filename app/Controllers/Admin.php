@@ -8,6 +8,7 @@ use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
+use App\Models\UploadPutusanModel;
 use App\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Config\Auth as AuthConfig;
@@ -570,6 +571,59 @@ class Admin extends BaseController
         //Pemberitahuan Swal
         session()->setFlashdata('success', 'Data Status Berhasil di Rubah');
         //Return Back
+        return redirect()->back();
+    }
+
+    public function uploadPutusan()
+    {
+
+        //ambil data no_perkara
+        $no_perkara = $this->request->getVar('no_perkara');
+
+        //ambil data perkara
+        $perkara = $this->modelPerkara->select('id_user, id_perkara')->where('no_perkara', $no_perkara)->first();
+        //ambil data user untuk ambil username
+        $user = $this->userModel->select('username')->where('id', $perkara['id_user'])->first();
+
+        $files = $this->request->getFile('file_putusan');
+        //validate rule upload
+        $validationRule = [
+            'file_putusan' => [
+                'rules' => [
+                    'uploaded[file_putusan]',
+                    'ext_in[file_putusan,pdf]',
+                    // 'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
+                    'max_size[file_putusan, 10240]',
+                    // 'max_dims[userfile,1024,768]',
+                ],
+            ],
+        ];
+
+        if (!$this->validateData([], $validationRule)) {
+            $data = ['errors' => $this->validator->getErrors()];
+            session()->setFlashdata('error', $data);
+            return redirect()->back();
+        }
+        // clear string
+        $new_name = clear($no_perkara);
+
+        $newName = date('Ymdhis') . '_' . 'Putusan' .   '.' . $files->getClientExtension();
+        //pindahkan ke folder
+        $files->move('uploads/' . $user->username . '/' . $new_name . '/' . 'putusan/', $newName);
+
+        //cek file berhasil dipindahkan atau tidak
+        if ($files->hasMoved()) {
+            # ambil data 
+            $datadb = [
+                'id_perkara' => $perkara['id_perkara'],
+                'nama_file_putusan' => $newName,
+                'label_putusan' => 'Putusan',
+            ];
+        }
+        //masukkan ke db
+        $uploadputusanmodel = new UploadPutusanModel();
+        $uploadputusanmodel->insert($datadb);
+        session()->setFlashdata('success', 'Data Putusan Berhasil diupload');
         return redirect()->back();
     }
 }

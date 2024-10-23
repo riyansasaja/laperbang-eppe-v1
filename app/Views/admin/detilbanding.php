@@ -380,17 +380,31 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Upload Putusan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <?= form_open_multipart('admin/upload_putusan'); ?>
+            <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
             <div class="modal-body">
-                ...
+                <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="file_putusan">
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text">Upload</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <?= form_close(); ?>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -400,4 +414,5 @@
 
 <?= $this->section('pageScripts') ?>
 <script src="<?= base_url('assets/js/detilbanding.js') ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 <?= $this->endSection() ?>
