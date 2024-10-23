@@ -8,16 +8,13 @@ use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
-use App\Models\PramajelisModel;
 use App\Models\UserModel;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use Myth\Auth\Models\UserModel as ModelsUserModel;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\GroupModel;
 use Myth\Auth\Password;
+use PHPUnit\Util\ThrowableToStringMapper;
 
 class Admin extends BaseController
 {
@@ -60,6 +57,8 @@ class Admin extends BaseController
         $this->config = config('Auth');
         $this->auth   = service('authentication');
         $this->validation = service('validation');
+
+        date_default_timezone_set('Asia/Singapore');
     }
 
 
@@ -170,6 +169,7 @@ class Admin extends BaseController
     //detilBanding
     public function detilBanding($no)
     {
+
         //get post nomor perkara
         $nomorperkara = decodelink($no);
         //getdetilbynomor
@@ -183,6 +183,8 @@ class Admin extends BaseController
         $data['bundelb'] = $this->modelBundelB->where('id_perkara', $id_perkara)->findAll();
         //getstatus perkara
         $data['status_perkara'] = $this->lspModel->where('nomor', $nomorperkara)->findAll();
+        //getpanitera_pengganti
+        $data['paniteras'] = $this->userModel->where('jabatan', 'Panitera Pengganti')->findAll();
         //kembalikan ke view admin detilbanding
         return view('admin/detilbanding', $data);
     }
@@ -424,8 +426,7 @@ class Admin extends BaseController
         }
 
         //ambil data
-        $validation = service('validation');
-        $validData = $validation->getValidated();
+        $validData = $this->validation->getValidated();
         //ambil data perkara di tb_perkara
         $perkara = $this->modelPerkara->select('id_perkara')->where('no_perkara', $validData['no_perkara'])->first();
         //ambil id Perkara
@@ -440,6 +441,97 @@ class Admin extends BaseController
         //Pemberitahuan Whatsapp
         //Pemberitahuan Swal
         session()->setFlashdata('success', 'Data Pramejelis Berhasil di pilih');
+        //Return Back
+        return redirect()->back();
+    }
+
+    public function setMajelisSidang()
+    {
+        //form Validation Rules
+        $rules = [
+            'no_perkara' => 'required',
+            'nama_majelis' => 'required'
+        ];
+
+        //cek error
+        if (! $this->validate($rules)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput();
+        }
+
+        //ambil data
+        $validData = $this->validation->getValidated();
+        //ambil data perkara di tb_perkara
+        $perkara = $this->modelPerkara->select('id_perkara')->where('no_perkara', $validData['no_perkara'])->first();
+        //ambil id Perkara
+        $id_perkara = $perkara['id_perkara'];
+        //data update
+        $update_perkara = [
+            'status' => 'Penetapan Majelis',
+            'majelis' => $validData['nama_majelis']
+        ];
+        //Update Data di Table Perkara
+        $this->modelPerkara->update($id_perkara, $update_perkara);
+        //Pemberitahuan Whatsapp
+        //Pemberitahuan Swal
+        session()->setFlashdata('success', 'Data Pramejelis Berhasil di pilih');
+        //Return Back
+        return redirect()->back();
+    }
+
+    public function setNoper()
+    {
+        $rules = [
+            'no_perkara' => 'required',
+            'nomor' => 'required|numeric',
+            'tahun' => 'required|numeric'
+        ];
+
+        //cek error
+        if (! $this->validate($rules)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput();
+        }
+        //ambil data
+        $validData = $this->validation->getValidated();
+        //ambil data perkara di tb_perkara
+        $perkara = $this->modelPerkara->getidByNomor($validData['no_perkara']);
+        //ambil id Perkara
+        $id_perkara = $perkara->id_perkara;
+        $no_banding = $validData['nomor'] . '/Pdt.G/' . $validData['tahun'] . '/PTA.Mdo';
+        //data update
+        $update_perkara = [
+            'no_banding' => $no_banding,
+            'tgl_reg_banding' => date('Y-m-d H:i:s'),
+            'status' => 'Pendaftaran Perkara Banding'
+        ];
+        //Update Data di Table Perkara
+        $this->modelPerkara->update($id_perkara, $update_perkara);
+        //Pemberitahuan Whatsapp
+        //Pemberitahuan Swal
+        session()->setFlashdata('success', 'Data Status Berhasil di Rubah');
+        //Return Back
+        return redirect()->back();
+    }
+
+    public function setPaniteraPengganti()
+    {
+        $rules = [
+            'no_perkara' => 'required',
+            'id_pp' => 'required|numeric'
+        ];
+        $validData = $this->validation->getValidated();
+        //ambil data perkara di tb_perkara
+        $perkara = $this->modelPerkara->getidByNomor($validData['no_perkara']);
+        //ambil id Perkara
+        $id_perkara = $perkara->id_perkara;
+        //$data update
+        $data_update = [
+            'status' => 'Penunjukan Panitera Pengganti',
+            'id_pp' => $validData['id_pp'],
+        ];
+        //Pemberitahuan Swal
+        session()->setFlashdata('success', 'Data Status Berhasil di Rubah');
         //Return Back
         return redirect()->back();
     }

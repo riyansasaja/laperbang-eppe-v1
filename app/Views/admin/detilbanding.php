@@ -111,7 +111,7 @@
                         <?php foreach ($status_perkara as $key => $status) : ?>
                             <tr>
                                 <td><?= $status['status']; ?></td>
-                                <td><?= $status['tgl_status']; ?></td>
+                                <td><?= date('d-m-Y', strtotime($status['tgl_status'])); ?></td>
                             </tr>
                         <?php endforeach; ?>
 
@@ -261,22 +261,39 @@
 </div>
 
 <!-- Modal Majelis -->
-<div class="modal fade" id="majelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="mejelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Penunjukan Majelis</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <!-- form kirim perkara -->
+            <?= form_open('admin/setmajelissidang'); ?>
+            <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
             <div class="modal-body">
-                ...
+                <div class="form-group">
+                    <label for="pramajelisselect">Pilih Majelis</label>
+                    <select class="form-control" id="pramajelisselect" name="nama_majelis">
+                        <option value="">Pilih Salah Satu</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                        <option value="C3">C3</option>
+                    </select>
+                </div>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+
+            <?= form_close(); ?>
         </div>
     </div>
 </div>
@@ -286,18 +303,31 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Pilih PP</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <?= form_open('admin/setpp'); ?>
+            <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
             <div class="modal-body">
-                ...
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Pilih Panitera Pengganti</label>
+                    <select class="form-control" name="id_pp">
+                        <!-- ambil data panitera pengganti -->
+                        <option value="" selected>Pilih Panitera Pengganti</option>
+                        <?php foreach ($paniteras as $pp): ?>
+                            <option value="<?= $pp['id'] ?>"><?= $pp['fullname'] ?></option>
+                        <?php endforeach; ?>
+
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+            <?= form_close(); ?>
         </div>
     </div>
 </div>
@@ -307,18 +337,39 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Daftar Perkara</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <?= form_open('admin/setnoper'); ?>
+            <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
             <div class="modal-body">
-                ...
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <input type="text" class="form-control" placeholder="nomor" name="nomor">
+                        <label for="" class="input-group-text">/Pdt.G/</label>
+                    </div>
+                    <select class="custom-select" name="tahun">
+                        <?php $tahun = date('Y'); ?>
+                        <?php for ($i = 2023; $i <= $tahun; $i++) : ?>
+                            <?php if ($i == $tahun) : ?>
+                                <option value="<?= $i ?>" selected><?= $i ?></option>
+                            <?php else : ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                    </select>
+                    <div class="input-group-append">
+                        <label for="" class="input-group-text">/PTA.Mdo</label>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
+            <?= form_close(); ?>
         </div>
     </div>
 </div>

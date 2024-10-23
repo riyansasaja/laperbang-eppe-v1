@@ -47,7 +47,7 @@ class ModelPerkara extends Model
     protected $beforeDelete   = [];
     protected $afterDelete = ['auditDelete', 'lspDelete'];
 
-
+    // private $db = $this->db->table($this->table);
     public function getPerkarabanding()
     {
         $db = $this->db->table($this->table);
@@ -63,6 +63,14 @@ class ModelPerkara extends Model
         $db->select('tb_perkara.no_perkara, tb_perkara.pihak_p, tb_perkara.pihak_t, tb_perkara.jenis_perkara, tb_perkara.no_banding, tb_perkara.status, tb_perkara.created_at, users.fullname, users.username');
         $db->where('tb_perkara.no_perkara', $nomor);
         $db->join('users', 'tb_perkara.id_user = users.id');
+        return $db->get()->getFirstRow();
+    }
+
+    public function getidByNomor($nomor_perkara)
+    {
+        $db = $this->db->table($this->table);
+        $db->select('id_perkara');
+        $db->where('no_perkara', $nomor_perkara);
         return $db->get()->getFirstRow();
     }
 

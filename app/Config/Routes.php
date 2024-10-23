@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-$routes->get('/', 'Dashboard::index',  ['filter' => 'role:admin,user,verifikator,validator']);
+$routes->get('/', 'Dashboard::index',  ['filter' => 'role:admin,user,verifikator,validator,hakim']);
 $routes->get('getstatus', 'ApilogStatus::find');
 
 $routes->group("verifikator", ['filter' => 'role:verifikator'], function ($routes) {
@@ -53,4 +53,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('delrole/(:num)/(:num)', 'Admin::delRole/$1/$2');
     $routes->post('edituser', 'Admin::editUser');
     $routes->post('setpramajelis', 'Admin::setPramajelis');
+    $routes->post('setnoper', 'Admin::setNoper');
+    $routes->post('setmajelissidang', 'Admin::setMajelisSidang');
+    $routes->post('setpp', 'Admin::setPaniteraPengganti');
 });
