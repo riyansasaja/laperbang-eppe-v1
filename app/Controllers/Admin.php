@@ -623,6 +623,10 @@ class Admin extends BaseController
         //masukkan ke db
         $uploadputusanmodel = new UploadPutusanModel();
         $uploadputusanmodel->insert($datadb);
+        $datastatus = [
+            'status' => 'Upload Putusan Banding'
+        ];
+        $this->modelPerkara->update($perkara['id_perkara'], $datastatus);
         session()->setFlashdata('success', 'Data Putusan Berhasil diupload');
         return redirect()->back();
     }
