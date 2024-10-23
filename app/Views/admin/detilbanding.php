@@ -60,7 +60,21 @@
         </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-2">
+        <div class="card card-outline card-dark">
+            <div class="card-body">
+                <button>Buka Kunci Upload</button>
+                <button>Download ZIP</button>
+                <button>Delete Perkara</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Tampilan Status Perkara -->
+<div class="row">
+    <div class="col-md-6">
         <div class="card  card-outline card-warning">
             <div class="card-header">
                 <h4>Status Perkara <span class="badge text-bg-info"><?= $perkara->status; ?></span></h4>
@@ -122,20 +136,9 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-2">
-        <div class="card card-outline card-dark">
-            <div class="card-body">
-                <button>Buka Kunci Upload</button>
-                <button>Download ZIP</button>
-                <button>Delete Perkara</button>
-            </div>
-        </div>
-    </div>
-
-
-
 </div>
+<!-- end tampilan status perkara -->
+
 
 <div class="row mt-3">
     <div class="col-md-6">
