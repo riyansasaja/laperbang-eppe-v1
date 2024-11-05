@@ -28,14 +28,14 @@
                 <?php if (in_groups('verifikator')) : ?>
                     <li class="nav-header">Verifikator</li>
                     <li class="nav-item">
-                        <a href="<?= base_url('verifikator') ?>" class="nav-link"> <i class="bi bi-bag-check mr-2"></i>
+                        <a href="<?= base_url('verifikator') ?>" class="nav-link"> <i class="fas fa-check-circle"></i>
                             <p>Verifikasi Berkas</p>
                         </a>
                     </li>
                 <?php elseif (in_groups('validator')) : ?>
                     <li class="nav-header">Verifikator</li>
                     <li class="nav-item">
-                        <a href="<?= base_url('validator') ?>" class="nav-link"> <i class="bi bi-bag-check mr-2"></i>
+                        <a href="<?= base_url('validator') ?>" class="nav-link"> <i class="fas fa-check-double"></i>
                             <p>Validasi Berkas</p>
                         </a>
                     </li>
@@ -43,12 +43,7 @@
                 <?php elseif (in_groups('user')) : ?>
                     <li class="nav-header"> Home User</li>
                     <li class="nav-item">
-                        <a href="<?= base_url('/') ?>" class="nav-link"> <i class="nav-icon bi bi-speedometer mr-2"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('user/banding') ?>" class="nav-link"> <i class="nav-icon bi bi-bank mr-2"></i>
+                        <a href="<?= base_url('user/banding') ?>" class="nav-link"> <i class="fa-fw fas fa-gavel"></i>
                             <p>Perkara Banding</p>
                         </a>
                     </li>

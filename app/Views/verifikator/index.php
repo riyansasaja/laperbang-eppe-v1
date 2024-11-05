@@ -5,20 +5,15 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('breadcumb') ?>
-
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Verifikasi Berkas</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Verifikasi Berkas</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
-
+<div class="col-sm-6">
+    <h1 class="m-0">Tambah Perkara Banding</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Verifikasi Berkas</li>
+    </ol>
+</div><!-- /.col -->
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>

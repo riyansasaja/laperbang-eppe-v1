@@ -6,21 +6,19 @@
 
 <?= $this->section('breadcumb') ?>
 
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Upload File Banding</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url('/user/banding') ?>">Perkara Banding</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Upload Files</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
+<div class="col-sm-6">
+    <h1 class="m-0">Perkara Banding</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url('/user/banding') ?>">Perkara Banding</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Perkara Banding</li>
+    </ol>
+</div><!-- /.col -->
 
 <?= $this->endSection() ?>
+
 
 <?= $this->section('main') ?>
 
@@ -75,22 +73,19 @@
                 <?= form_hidden('id_perkara', $perkara->id_perkara) ?>
                 <div class="row">
                     <div class="col-4 mb-2">
-
-                        <select class="form-select" name="label">
+                        <select class="form-control" name="label">
                             <option value="" selected>Pilih Yang Mau Diupload</option>
                             <?php foreach ($label as $lab) : ?>
                                 <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
-
                             <?php endforeach; ?>
                         </select>
-
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
                     </div>
                     <div class="col-auto mb-2">
-                        <input class="form-control" type="file" name="bundelb" accept="application/pdf">
+                        <input class="form-control-file" type="file" name="bundelb" accept="application/pdf">
                     </div>
                     <div class="col-auto mb-2">
-                        <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-cloud-upload-fill"></i> Upload</button>
+                        <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-arrow-circle-up"></i> Upload</button>
                     </div>
                 </div>
                 <?= form_close(); ?>
@@ -111,20 +106,20 @@
                                         </td>
 
                                         <?php if ($bundel['verval_status'] == 1): ?>
-                                            <td><span class="badge text-bg-secondary text-white">Uploaded</span></td>
+                                            <td><span class="badge badge-secondary text-white">Uploaded</span></td>
                                         <?php elseif ($bundel['verval_status'] == 2) : ?>
-                                            <td><span class="badge text-bg-info text-white">Validated</span></td>
+                                            <td><span class="badge badge-info text-white">Validated</span></td>
                                         <?php elseif ($bundel['verval_status'] == 3) : ?>
-                                            <td><span class="badge text-bg-primary text-white">Verified</span></td>
+                                            <td><span class="badge badge-primary text-white">Verified</span></td>
                                         <?php else : ?>
-                                            <td><span class="badge text-bg-danger text-white">Rejected</span></td>
+                                            <td><span class="badge badge-danger text-white">Rejected</span></td>
                                         <?php endif; ?>
                                         <td>
                                             <?= $bundel['komentar']; ?>
                                         </td>
 
                                         <td>
-                                            <a href="<?= base_url('user/delbundelb/') . $bundel['nama_file_b'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-secondary"><i class="bi bi-trash"></i> Delete</span></a>
+                                            <a href="<?= base_url('user/delbundelb/') . $bundel['nama_file_b'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge badge-danger"><i class="far fa-trash-alt"></i> Delete</span></a>
                                         </td>
 
                                     </tr>
@@ -154,7 +149,7 @@
                 <div class="row">
                     <div class="col-4 mb-2">
 
-                        <select class="form-select" name="label" id="label">
+                        <select class="form-control" name="label" id="label">
                             <option value="" selected>Pilih Yang Mau Diupload</option>
                             <?php foreach ($label_a as $lab) : ?>
                                 <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
@@ -165,10 +160,10 @@
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
                     </div>
                     <div class="col-auto mb-2">
-                        <input class="form-control" type="file" name="bundela" accept="application/pdf">
+                        <input class="form-control-file" type="file" name="bundela" accept="application/pdf">
                     </div>
                     <div class="col-auto mb-2">
-                        <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-cloud-upload-fill"></i> Upload</button>
+                        <button type="submit" class="btn btn-primary mb-3"><i class="fa fw fas fa-arrow-circle-up"></i> Upload</button>
                     </div>
                 </div>
                 <?= form_close(); ?>
@@ -189,20 +184,20 @@
                                         </td>
 
                                         <?php if ($bundel['verval_status'] == 1): ?>
-                                            <td><span class="badge text-bg-secondary text-white">Uploaded</span></td>
+                                            <td><span class="badge badge-secondary text-white">Uploaded</span></td>
                                         <?php elseif ($bundel['verval_status'] == 2) : ?>
-                                            <td><span class="badge text-bg-info text-white">Validated</span></td>
+                                            <td><span class="badge badge-info text-white">Validated</span></td>
                                         <?php elseif ($bundel['verval_status'] == 3) : ?>
-                                            <td><span class="badge text-bg-primary text-white">Verified</span></td>
+                                            <td><span class="badge badge-primary text-white">Verified</span></td>
                                         <?php else : ?>
-                                            <td><span class="badge text-bg-danger text-white">Rejected</span></td>
+                                            <td><span class="badge badge-danger text-white">Rejected</span></td>
                                         <?php endif; ?>
                                         <td>
                                             <?= $bundel['komentar']; ?>
                                         </td>
 
                                         <td>
-                                            <a href="<?= base_url('user/delbundela/') . $bundel['nama_file_a'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge text-bg-secondary"><i class="bi bi-trash"></i> Delete</span></a>
+                                            <a href="<?= base_url('user/delbundela/') . $bundel['nama_file_a'] . '/' . clear($perkara->no_perkara) ?>"> <span class="badge badge-danger"><i class="far fa-trash-alt"></i> Delete</span></a>
                                         </td>
 
                                     </tr>

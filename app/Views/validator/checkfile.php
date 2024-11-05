@@ -6,19 +6,17 @@ v<?= $this->extend('dashboard/layout') ?>
 
 <?= $this->section('breadcumb') ?>
 
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Validasi Berkas</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url('validator/') ?>">Verifikasi Berkas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Check File</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
+
+<div class="col-sm-6">
+    <h1 class="m-0">Validasi Berkas</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url('validator/') ?>">Validasi Berkas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Check File</li>
+    </ol>
+</div><!-- /.col -->
 
 <?= $this->endSection() ?>
 
@@ -27,8 +25,8 @@ v<?= $this->extend('dashboard/layout') ?>
 <div class="row">
     <div class="col-md-9">
 
-        <div class="ratio ratio-4x3">
-            <iframe src="<?= base_url('uploads/') . $file['username'] . '/' . clear($file['no_perkara']) . '/' . $file['bundel'] . '/' . $file['nama_file'] ?>" frameborder="0" allowfullscreen></iframe>
+        <div class="embed-responsive embed-responsive-4by3"">
+            <iframe class=" embed-responsive-item" src="<?= base_url('uploads/') . $file['username'] . '/' . clear($file['no_perkara']) . '/' . $file['bundel'] . '/' . $file['nama_file'] ?>" frameborder="0" allowfullscreen></iframe>
         </div>
 
 

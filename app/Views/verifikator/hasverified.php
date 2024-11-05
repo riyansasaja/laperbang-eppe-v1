@@ -6,18 +6,16 @@
 
 <?= $this->section('breadcumb') ?>
 
-<!--begin::Row-->
-<div class="row">
-    <div class="col-sm-6">
-        <h3 class="mb-0">Verifikasi Berkas</h3>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Verifikasi Berkas</li>
-        </ol>
-    </div>
-</div> <!--end::Row-->
+<div class="col-sm-6">
+    <h1 class="m-0">Tambah Perkara Banding</h1>
+</div><!-- /.col -->
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Verifikasi Berkas</li>
+    </ol>
+</div><!-- /.col -->
+
 
 <?= $this->endSection() ?>
 
@@ -95,10 +93,10 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <?= form_open('validator/cancel'); ?>
-                                        <?= form_hidden('bundel', 'bundela'); ?>
-                                        <?= form_hidden('nama_file', $bundel_a['nama_file_a']); ?>
-                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Cancel Validasi</button>
+                                        <?= form_open('verifikator/cancel'); ?>
+                                        <?= form_hidden('bundel', 'bundelb'); ?>
+                                        <?= form_hidden('nama_file', $bundel_b['nama_file_b']); ?>
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-eyeglasses"></i> Cancel Verfifikasi</button>
                                         <?= form_close(); ?>
                                     </td>
                                 </tr>
