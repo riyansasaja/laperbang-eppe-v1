@@ -25,24 +25,23 @@
         <!-- //tabel menampilkan all data -->
         <a href="<?= base_url('user/addbanding') ?>" class="btn btn-primary text-white"><i class="bi bi-database-fill-add"></i> Tambah Data</a>
 
-
-        <table class="table table-striped" id="dataPerkara">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nomor Perkara</th>
-                    <th scope="col">Jenis Perkara</th>
-                    <th scope="col">Nomor Banding</th>
-                    <th scope="col">Tgl Upload</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm" id="dataPerkara">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nomor Perkara</th>
+                        <th scope="col">Jenis Perkara</th>
+                        <th scope="col">Nomor Banding</th>
+                        <th scope="col">Tgl Upload</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
 
 
 

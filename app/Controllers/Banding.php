@@ -160,7 +160,7 @@ class Banding extends BaseController
                 'label' => 'File',
                 'rules' => [
                     'uploaded[bundelb]',
-                    'ext_in[bundelb,pdf]',
+                    'ext_in[bundelb,pdf,rtf]',
                     // 'mime_in[userfile,image/jpg,image/jpeg,image/gif,image/png,image/webp]',
                     // 'max_size[inmailAttachmet, 2048]',
                     // 'max_dims[userfile,1024,768]',
@@ -273,7 +273,7 @@ class Banding extends BaseController
         // clear string
         $new_name = clear($perkara->no_perkara);
 
-        $newName = date('Ymdhis') . '_' . $label .   '.' . $files->getClientExtension();
+        $newName = date('Ymdhis') . '_' . clear($label) .   '.' . $files->getClientExtension();
         //pindahkan ke folder
         $files->move('uploads/' . $perkara->username . '/' . $new_name . '/' . 'bundela/', $newName);
 

@@ -13,7 +13,7 @@
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
         <li class="breadcrumb-item"><a href="<?= base_url('/user/banding') ?>">Perkara Banding</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Perkara Banding</li>
+        <li class="breadcrumb-item active" aria-current="page">Upload Berkas Banding</li>
     </ol>
 </div><!-- /.col -->
 
@@ -29,7 +29,7 @@
 
 
 <div class="row">
-    <div class="col-5">
+    <div class="col-md-5">
 
 
         <div class="card"> <!-- menampilkan detail perkara -->
@@ -62,7 +62,7 @@
 </div>
 
 <div class="row mt-3">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <span class="fs-5">Upload Bundle B</span>
@@ -82,7 +82,7 @@
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
                     </div>
                     <div class="col-auto mb-2">
-                        <input class="form-control-file" type="file" name="bundelb" accept="application/pdf">
+                        <input class="form-control-file" type="file" name="bundelb" accept=".pdf,.rtf">
                     </div>
                     <div class="col-auto mb-2">
                         <button type="submit" class="btn btn-primary mb-3"><i class="fas fa-arrow-circle-up"></i> Upload</button>
@@ -137,7 +137,7 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <span class="fs-5">Upload Bundle A</span>
