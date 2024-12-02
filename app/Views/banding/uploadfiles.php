@@ -24,7 +24,9 @@
 
 
 <?php
-
+// dd($bundelb);
+// $aktabanding = array_search('Akta Banding', $bundelb[0]);
+// dd($aktabanding);
 ?>
 
 
@@ -75,9 +77,17 @@
                     <div class="col-4 mb-2">
                         <select class="form-control" name="label">
                             <option value="" selected>Pilih Yang Mau Diupload</option>
-                            <?php foreach ($label as $lab) : ?>
-                                <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
-                            <?php endforeach; ?>
+                            <!-- cek dulu akta banding sudah ada atau belum -->
+
+                            <?php if (!$bundelb) : ?>
+                                <option value="Akta Banding">Akta Banding</option>
+                            <?php else: ?>
+                                <!-- //looping label ambil dari tabel refrensi dokumen -->
+                                <?php foreach ($label as $lab) : ?>
+                                    <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
+                                <?php endforeach; ?>
+                                <!-- end Looping -->
+                            <?php endif; ?>
                         </select>
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
                     </div>
@@ -150,11 +160,15 @@
                     <div class="col-4 mb-2">
 
                         <select class="form-control" name="label" id="label">
-                            <option value="" selected>Pilih Yang Mau Diupload</option>
-                            <?php foreach ($label_a as $lab) : ?>
-                                <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
+                            <?php if (!$bundelb) : ?>
+                                <option value="" selected>Pilih Yang Mau Diupload</option>
+                            <?php else : ?>
+                                <option value="" selected>Pilih Yang Mau Diupload</option>
+                                <?php foreach ($label_a as $lab) : ?>
+                                    <option value="<?= $lab['nama_label'] ?>"><?= $lab['nama_label'] ?></option>
 
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </select>
 
                         <!-- <input type="text" name="label" readonly class="form-control-plaintext" value="Akta Banding"> -->
