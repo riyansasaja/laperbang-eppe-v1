@@ -10,6 +10,7 @@ use App\Models\ModelJenisPerkara;
 use App\Models\ModelPerkara;
 use App\Models\ModelrefBundelA;
 use App\Models\ModelrefBundelB;
+use App\Models\TimeControlModel;
 use App\Models\UserModel;
 
 class Banding extends BaseController
@@ -190,6 +191,23 @@ class Banding extends BaseController
                 session()->setFlashdata('error', $data);
                 return redirect()->to('/user/upload' . '/' . $id_perkara);
             }
+
+            //jika sudah insert di database baru masuk ke tb time kontrol
+            //cek dulu kalau labelnya Akta Banding
+            if ($label == 'Akta Banding') {
+                # input ke database tb_time_kontrol
+                //inisiasi
+                $modelTimeControl = new TimeControlModel();
+                $dataTimeControl = [
+                    'user_id'   => user()->id,
+                    'id_perkara' => $id_perkara,
+                    'time_log'  => time()
+                ];
+                $modelTimeControl->insert($dataTimeControl);
+            }
+
+
+
             //notification whatsapp
             notification($this->validatorphone, $label . ' untuk Perkara ' . $perkara->no_perkara . ' selesai diupload, siap *DIVALIDASI*');
 
@@ -329,5 +347,19 @@ class Banding extends BaseController
         }
         session()->setFlashdata('success', 'Data Berhasil dihapus');
         return redirect()->to('/user/upload' . '/' . $bundelb['id_perkara']);
+    }
+
+
+    public function getTimeControlbyId($idperkara)
+    {
+        //inisasi model time contorl
+        $timeControlModel = new TimeControlModel();
+        //search by id
+        $timeControl = $timeControlModel->where('id_perkara', $idperkara)
+            ->orderBy('time_log_id', 'DESC')
+            ->limit(1)
+            ->first();
+
+        return $this->respondCreated($timeControl);
     }
 }

@@ -32,8 +32,6 @@
 
 <div class="row">
     <div class="col-md-5">
-
-
         <div class="card"> <!-- menampilkan detail perkara -->
             <div class="card-header">
                 <span class="fs-4">Data Perkara</span>
@@ -57,10 +55,21 @@
                 </table>
             </div>
         </div>
-
-
+    </div>
+    <div class="col-md-1">
 
     </div>
+
+    <div class="col-md-6" id="infoerror" hidden>
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="text-danger"><i class="fas fa-lock text-danger mr-2"></i> Upload e-Doc Locked !</h4>
+                <p class="mt-3">Mohon maaf, fitur upload file terkunci, dikarenakan proses upload file sudah melebihi batas waktu yang ditentukan. Silahkan mengajukan request Unlock melalui tombol di bawah ini !</p>
+                <button class="btn btn-danger mt-2" id="bukaKunci"><i class="fas fa-lock-open mr-2"></i>Request Unlock</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="row mt-3">
@@ -233,6 +242,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
+<script>
+    let id_perkara = <?= json_encode($perkara->id_perkara) ?>;
+</script>
 <script src="<?= base_url('assets/js/banding_upload.js') ?>"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
