@@ -3,23 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\RESTful\ResourceController;
-use Exception;
-use config\Auth;
 use CodeIgniter\API\ResponseTrait;
-use \Firebase\JWT\JWT;
-use App\Models\LoginModel;
 use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelJenisPerkara;
-use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
 use App\Models\ModelrefBundelA;
 use App\Models\ModelrefBundelB;
 use App\Models\UserModel;
-use Firebase\JWT\Key;
-use PhpParser\Node\Stmt\Echo_;
 
 class Banding extends BaseController
 {
@@ -47,13 +38,13 @@ class Banding extends BaseController
         $data = $modelPerkara->where('id_user', user()->id)->orderBy('id_perkara', 'desc')->findAll();
         if ($data == null) {
             # code...
-            return $this->failNotFound('Data Tidak ditemukan');
+            return $this->failNotFound('Data tidak ditemukan atau kosong');
         }
         //response
         $response = [
             'status' => 200,
             'error' => false,
-            'message' => 'Data Status Perkara ditemukan',
+            'message' => 'Success',
             'data' => $data
         ];
         return $this->respond($response); //kirim response json
@@ -93,13 +84,13 @@ class Banding extends BaseController
         //function for success
         $insert = $modelPerkara->insert($validData);
         if ($insert) {
-            # code...
-            session()->setFlashdata('success', 'Data Perkara Baru Berhasil Ditambahkan');
-            return redirect()->to('user/banding');
+            # if success insert to database
+            session()->setFlashdata('success', 'Data Perkara Baru Berhasil Ditambahkan'); //set flash data
+            return redirect()->to('user/banding'); //kembalikan ke daftar perkara dengan flash message
         } else {
             # code...
-            session()->setFlashdata('error', 'Data tidak berhasil ditambahkan, coba lagi!');
-            return redirect()->to('user/banding');
+            session()->setFlashdata('error', 'Data Perkara tidak berhasil diinput di database, coba lagi, atau hubungi admin!'); //set flash data
+            return redirect()->to('user/banding'); //kembalikan ke daftar perkara dengan flash message
         }
     }
 
