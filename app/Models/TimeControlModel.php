@@ -43,4 +43,20 @@ class TimeControlModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+
+    public function cekTime($id_perkara)
+    {
+        $lasttime =  $this->db->table($this->table)->select('time_log')->where('id_perkara', $id_perkara)->orderBy('time_log_id', 'DESC')
+            ->limit(1)->get()->getFirstRow();
+        $selisih = time() - $lasttime;
+        $bataswaktu = 3600 * 72;
+        if ($selisih > $bataswaktu) {
+            # code...
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

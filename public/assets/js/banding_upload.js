@@ -28,7 +28,7 @@ $(document).ready(function () {
             let time_log = response.time_log;
             let time_now = Math.floor(new Date().getTime()/1000.0);
             let selisih_waktu = time_now - time_log;
-            let batas_upload_bundel_b = 3600 * 72
+            let batas_upload_bundel_b = 3600 * 72;
             console.info('waktu sekarang' + time_now);
             console.info('selisih waktu' + selisih_waktu);
             console.info('batas upload' + batas_upload_bundel_b);

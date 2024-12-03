@@ -24,7 +24,7 @@
 
 
 <?php
-// dd($status_perkara);
+// dd($perkara);
 ?>
 
 
@@ -60,12 +60,21 @@
         </div>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-3 text-center">
         <div class="card card-outline card-dark">
             <div class="card-body">
-                <button>Buka Kunci Upload</button>
-                <button>Download ZIP</button>
-                <button>Delete Perkara</button>
+                <?= form_open('admin/unlockupload'); ?>
+                <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
+                <div class="mb-2">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-lock-open mr-2"></i>Buka Kunci Upload</button>
+                </div>
+                <div>
+                    <button>Download ZIP</button>
+                </div>
+                <div>
+                    <button>Delete Perkara</button>
+                </div>
+                <?= form_close(); ?>
             </div>
         </div>
     </div>

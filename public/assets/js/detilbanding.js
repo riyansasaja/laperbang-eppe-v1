@@ -1,4 +1,5 @@
 $(document).ready(function () {    
+
     $('#simpan').on('click', function (e) {
         //ambil value dari select
         // e.preventDefault();
@@ -46,6 +47,10 @@ $(document).ready(function () {
             text: text,
           });
     }
+
+
+    //tombol buka kunci
+
 
 
     //fungsi untuk menampilkan alert dari session php

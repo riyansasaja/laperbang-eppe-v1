@@ -8,6 +8,7 @@ use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
+use App\Models\TimeControlModel;
 use App\Models\UploadPutusanModel;
 use App\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
@@ -628,6 +629,32 @@ class Admin extends BaseController
         ];
         $this->modelPerkara->update($perkara['id_perkara'], $datastatus);
         session()->setFlashdata('success', 'Data Putusan Berhasil diupload');
+        return redirect()->back();
+    }
+
+    public function unlockUpload()
+    {
+        $no_perkara = $this->request->getVar('no_perkara');
+        //dapat id perkara
+        $id_perkara = $this->modelPerkara->getidByNomor($no_perkara)->id_perkara;
+
+
+        //ambil data id_user dari perkara tersebut
+        $id_user = $this->modelPerkara->select('id_user')->where('id_perkara', $id_perkara)->first();
+        //ambil seluruh data user yang mengupload
+        $user = $this->userModel->where('id', $id_user['id_user'])->first();
+        //simpan di database
+        //inisasi
+        $timeControlModel = new TimeControlModel();
+        $datatimecontrol = [
+            'user_id' => $user->id,
+            'id_perkara' => $id_perkara,
+            'time_log'  => time()
+        ];
+        $timeControlModel->insert($datatimecontrol);
+        session()->setFlashdata('success', 'File Upload berhasil di Unlock');
+        //notification
+        notification($user->phone, 'Upload File telah di Unlock oleh Admin Laperbang');
         return redirect()->back();
     }
 }
