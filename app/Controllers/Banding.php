@@ -12,6 +12,7 @@ use App\Models\ModelrefBundelA;
 use App\Models\ModelrefBundelB;
 use App\Models\TimeControlModel;
 use App\Models\UserModel;
+use PhpParser\ErrorHandler\Throwing;
 
 class Banding extends BaseController
 {
@@ -361,5 +362,26 @@ class Banding extends BaseController
             ->first();
 
         return $this->respondCreated($timeControl);
+    }
+
+    public function requestUnlock()
+    {
+        $data['csrf'] = csrf_hash();
+        $idperkara = $this->request->getPost('idperkara');
+        $pesan = $this->request->getPost('pesan');
+
+        //inisasi user model
+        $usermodel = new UserModel();
+        //ambil data phone admin
+        $adminphone = $usermodel->select('phone')->where('username', 'admin')->first();
+
+        //inisasi model perkara
+        $perkaraModel = new ModelPerkara();
+        //ambil nomo perkara
+        $noPerkara = $perkaraModel->select('no_perkara')->where('id_perkara', $idperkara)->first();
+        //kirim notification dengan helper
+        notification($adminphone->phone, 'perkara Nomor' . $noPerkara['no_perkara'] . ' Mengajukan Unlock Upload Berkas, dengan Alasan ' . $pesan);
+        //kembalikan response
+        return $this->respondCreated('Permohonan Unlock sudah dikirim ke Admin PTA, terimakasih.');
     }
 }

@@ -38,6 +38,7 @@ $routes->group("user", ['filter' => 'role:user'], function ($routes) {
     $routes->post('uploada', 'Banding::uploadBundelA');
     $routes->get('delbundela/(:any)/(:any)', 'Banding::delBundelA/$1/$2');
     $routes->get('gettimecontrol/(:any)', 'Banding::getTimeControlbyId/$1');
+    $routes->post('requnlock', 'Banding::requestUnlock');
 });
 
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {

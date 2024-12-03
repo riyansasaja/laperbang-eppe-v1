@@ -65,6 +65,7 @@
             <div class="card-body">
                 <h4 class="text-danger"><i class="fas fa-lock text-danger mr-2"></i> Upload e-Doc Locked !</h4>
                 <p class="mt-3">Mohon maaf, fitur upload file terkunci, dikarenakan proses upload file sudah melebihi batas waktu yang ditentukan. Silahkan mengajukan request Unlock melalui tombol di bawah ini !</p>
+                <input type="hidden" class="txt_csrfname" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                 <button class="btn btn-danger mt-2" id="bukaKunci"><i class="fas fa-lock-open mr-2"></i>Request Unlock</button>
             </div>
         </div>

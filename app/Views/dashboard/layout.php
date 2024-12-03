@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= csrf_meta() ?>
     <title>Laperbang</title>
 
     <!-- Google Font: Source Sans Pro -->

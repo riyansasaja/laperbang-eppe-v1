@@ -47,14 +47,46 @@ $(document).ready(function () {
 
     //buka kunci di klik
     $('#bukaKunci').on('click', function () {
-        Swal.fire({
-            title : "Request Unlock",
-            input: "textarea",
-            inputLabel: "Alasan Upload e-Doc ",
-            inputPlaceholder: "Tuliskan Alasan Anda ....",
-            confirmButtonText: "Kirim",
-            showCancelButton: true
-        });
+        let tes = $("meta[name='jago']").attr("content");
+        let csrf = $('meta[name="{csrf_header}"]').attr('content');
+        let csrf_name = $('.txt_csrfname').attr('name');
+        let csrfHash = $('.txt_csrfname').val(); 
+        // return console.info(csrf);
+
+
+        (async () => {
+            const {value : alasan} = await Swal.fire({
+                title : "Request Unlock",
+                input: "textarea",
+                inputLabel: "Alasan Upload e-Doc ",
+                inputPlaceholder: "Tuliskan Alasan Anda ....",
+                confirmButtonText: "Kirim",
+                showCancelButton: true,
+            });
+            if (alasan) {
+               $.ajax({
+                type: "post",
+                url: `${baseUrl}user/requnlock`,
+                headers:{'X-CSRF-TOKEN': csrfHash },
+                data : {
+                    idperkara : id_perkara,
+                    pesan : 'tes satu dua',
+                },
+                dataType: "json",
+                success: function (response) {
+                    console.info(response);
+                    Swal.fire('Request Unlock Terkirim.');
+                },
+                error: function(xhr, status, error) {
+                    console.info(xhr);
+                }
+               });
+            }
+        })()
+
+
+
+       
     });
 
 
