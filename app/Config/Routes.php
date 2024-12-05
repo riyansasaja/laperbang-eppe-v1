@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-$routes->get('/', 'Dashboard::index',  ['filter' => 'role:admin,user,verifikator,validator,hakim']);
+$routes->get('/', 'Dashboard::index',  ['filter' => 'role:admin,user,verifikator,validator,hakim,pp']);
 $routes->get('getstatus', 'ApilogStatus::find');
 
 $routes->group("verifikator", ['filter' => 'role:verifikator'], function ($routes) {
