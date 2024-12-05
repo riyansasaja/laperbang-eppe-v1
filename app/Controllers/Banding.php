@@ -118,10 +118,20 @@ class Banding extends BaseController
     {
         $modelPerkara = new ModelPerkara(); //inisaiasi model perkara
         $modelbundelb = new ModelBundelB(); //inisiasi model bundel b
+        $timeControlModel = new TimeControlModel(); //inisiasi model TimeControl
         //ambil hasil kiriman file
         $label = $this->request->getPost('label');
         $id_perkara = $this->request->getPost('id_perkara');
         $files = $this->request->getFile('bundelb');
+
+        //cek time control true or false
+        $endTime = $timeControlModel->cekTime($id_perkara);
+        if ($endTime) {
+            # code...
+            session()->setFlashdata('error', 'Udah dibilangin minta lepas kunci masih ngeyel!!!');
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
 
         //cek mereka kirim label atau tidak??
         if ($label === "") {
@@ -230,10 +240,24 @@ class Banding extends BaseController
 
         $modelPerkara = new ModelPerkara(); //inisaiasi model perkara
         $modelbundel = new ModelBundelA(); //inisiasi model bundel b
+        $timeControlModel = new TimeControlModel(); //inisiasi model timeControl
+
         //ambil hasil kiriman file
         $label = $this->request->getPost('label');
         $id_perkara = $this->request->getPost('id_perkara');
         $files = $this->request->getFile('bundela');
+
+
+
+        //cek time control true or false
+        $endTime = $timeControlModel->cekTime($id_perkara);
+        if ($endTime) {
+            # code...
+            session()->setFlashdata('error', 'Udah dibilangin minta lepas kunci masih ngeyel!!!');
+            return redirect()->to('/user/upload' . '/' . $id_perkara);
+        }
+
+
 
         //cek mereka kirim label atau tidak??
         if ($label === "") {
