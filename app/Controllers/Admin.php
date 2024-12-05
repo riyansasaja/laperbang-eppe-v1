@@ -647,7 +647,7 @@ class Admin extends BaseController
         //inisasi
         $timeControlModel = new TimeControlModel();
         $datatimecontrol = [
-            'user_id' => $user->id,
+            'user_id' => user()->id,
             'id_perkara' => $id_perkara,
             'time_log'  => time()
         ];
