@@ -21,7 +21,7 @@
 <?= $this->section('main') ?>
 
 <?php
-d($perkara);
+// d($perkara);
 ?>
 
 <div class="row">
