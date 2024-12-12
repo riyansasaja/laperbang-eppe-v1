@@ -27,6 +27,17 @@ $routes->group("validator", ['filter' => 'role:validator'], function ($routes) {
     $routes->post('cancel', 'Validator::revalid');
 });
 
+
+$routes->group('panitera',  ['filter' => 'role:pp'], function ($routes) {
+    $routes->get('getbanding', 'Panitera::index');
+});
+
+$routes->group('hakim',  ['filter' => 'role:hakim'], function ($routes) {
+    $routes->get('getbanding', 'Hakim::index');
+    $routes->get('detilperkara/(:num)', 'Hakim::detilPerkara/$1');
+});
+
+
 $routes->group("user", ['filter' => 'role:user'], function ($routes) {
     $routes->get('banding', 'Banding::index');
     $routes->get('getbanding', 'Banding::getPerkarabanding');

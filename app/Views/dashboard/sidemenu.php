@@ -40,6 +40,23 @@
                         </a>
                     </li>
 
+
+                <?php elseif (in_groups('pp')) : ?>
+                    <li class="nav-header">Manajemen Banding</li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('panitera/getbanding') ?>" class="nav-link"> <i class="fa-fw fas fa-gavel"></i>
+                            <p>Perkara Banding</p>
+                        </a>
+                    </li>
+
+                <?php elseif (in_groups('hakim')) : ?>
+                    <li class="nav-header">Manajemen Banding</li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('hakim/getbanding') ?>" class="nav-link"> <i class="fa-fw fas fa-gavel"></i>
+                            <p>Perkara Banding</p>
+                        </a>
+                    </li>
+
                 <?php elseif (in_groups('user')) : ?>
                     <li class="nav-header"> Home User</li>
                     <li class="nav-item">
