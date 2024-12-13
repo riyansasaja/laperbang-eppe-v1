@@ -192,6 +192,7 @@
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>dist/js/adminlte.js"></script>
 
+
     <script>
         let baseUrl = <?= json_encode(base_url()) ?>;
         let error = <?= json_encode(session()->getFlashdata('error')) ?>;
