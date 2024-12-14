@@ -1,10 +1,9 @@
 $(document).ready(function () {
     let ctx = document.getElementById('myChart');
 
-
     $.ajax({
         type: "get",
-        url: `${base_url}getrekapbulan`,
+        url: `${baseUrl}getrekapbulan`,
         dataType: "json",
         success: function (res) {
             const myChart = new Chart(ctx, {
