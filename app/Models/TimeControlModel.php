@@ -51,7 +51,7 @@ class TimeControlModel extends Model
         $lasttime =  $this->db->table($this->table)->select('time_log')->where('id_perkara', $id_perkara)->orderBy('time_log_id', 'DESC')
             ->limit(1)->get()->getFirstRow();
         if ($lasttime == null) {
-            return true;
+            return false;
         }
 
         $selisih = time() - $lasttime->time_log;
