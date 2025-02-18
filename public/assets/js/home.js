@@ -68,7 +68,7 @@ $(document).ready(function () {
                 //tampilkan pemberitahuan di swal2
                 Swal.fire({
                     title: "Error",
-                    text: jqXHR.responseJSON.messages.error,
+                    text: jqXHR.responseJSON.messages.error ,
                     icon: "error"
                   });
             }

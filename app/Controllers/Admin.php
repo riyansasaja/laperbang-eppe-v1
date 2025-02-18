@@ -76,9 +76,14 @@ class Admin extends BaseController
     public function users()
     {
 
+        $authorize = $auth = service('authorization');
+
+
         // //mengambil seluruh data users lengkap dengan role
         $data['users'] = $this->userModel->findAll();
         // dd($data);
+        //mengambil seluruh data groups
+        $data['datagroups'] = $groups = $authorize->groups();
         //kemudian dikirim ke view
 
         return view('admin/users', $data);

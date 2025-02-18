@@ -24,7 +24,6 @@
 <?php
 //panggil group model
 $groupModel = new \Myth\Auth\Models\GroupModel();
-
 ?>
 
 <div class="row">
@@ -139,14 +138,11 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
                     <label for="inputJabatan" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
                         <select class="form-control" aria-label="Default select example" name="jabatan">
+
                             <option selected value="">Open this select menu</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Operator">Operator</option>
-                            <option value="User">User</option>
-                            <option value="Validator">Validator</option>
-                            <option value="Verifikator">Verifikator</option>
-                            <option value="Panitera Pengganti">Panitera Pengganti</option>
-                            <option value="Hakim">Hakim</option>
+                            <?php foreach ($datagroups as $group): ?>
+                                <option value="<?= $group->name ?>"><?= $group->description ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
