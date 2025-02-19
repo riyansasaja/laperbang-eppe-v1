@@ -38,6 +38,11 @@ $routes->group('hakim',  ['filter' => 'role:hakim'], function ($routes) {
     $routes->get('detilperkara/(:num)', 'Hakim::detilPerkara/$1');
 });
 
+$routes->group('pimpinan',  ['filter' => 'role:ketua,wakil ketua'], function ($routes) {
+    $routes->get('/', 'Pimpinan::index');
+    $routes->get('detilperkara/(:num)', 'Hakim::detilPerkara/$1');
+});
+
 
 $routes->group("user", ['filter' => 'role:user'], function ($routes) {
     $routes->get('banding', 'Banding::index');

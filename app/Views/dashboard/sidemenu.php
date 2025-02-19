@@ -32,6 +32,21 @@
                             <p>Verifikasi Berkas</p>
                         </a>
                     </li>
+
+                <?php elseif (in_groups(['ketua', 'wakil ketua'])) : ?>
+                    <li class="nav-header">Penunjukan Majelis Hakim</li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('pimpinan') ?>" class="nav-link"> <i class="fas fa-check-circle"></i>
+                            <p>PRA PMH/PMH</p>
+                        </a>
+                    </li>
+                    <li class="nav-header">Manajemen Banding</li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('hakim/getbanding') ?>" class="nav-link"> <i class="fa-fw fas fa-gavel"></i>
+                            <p>Perkara Banding</p>
+                        </a>
+                    </li>
+
                 <?php elseif (in_groups('validator')) : ?>
                     <li class="nav-header">Verifikator</li>
                     <li class="nav-item">
