@@ -28,10 +28,10 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col text-center">
-                            <img src="assets/img/undraw_ok.png" alt="image-ok" class="img-fluid" width="80%">
+                            <img src="assets/img/undraw_ok.png" alt="image-ok" class="img-fluid" width="75%">
                         </div>
                         <div class="col">
-                            <h2 class="text-info">Belum ada perkara untuk ditentukan PMH, Terimakasih!!</h2>
+                            <h2 class="text-info">Belum ada perkara untuk ditentukan PMH. <br> Terimakasih!!</h2>
                         </div>
                     </div>
 

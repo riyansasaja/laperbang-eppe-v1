@@ -37,7 +37,7 @@
                     <li class="nav-header">Penunjukan Majelis Hakim</li>
                     <li class="nav-item">
                         <a href="<?= base_url('pimpinan') ?>" class="nav-link"> <i class="fas fa-check-circle"></i>
-                            <p>PRA PMH/PMH</p>
+                            <p> PRA PMH/PMH</p>
                         </a>
                     </li>
                     <li class="nav-header">Manajemen Banding</li>
