@@ -25,9 +25,9 @@ use CodeIgniter\Throttle\ThrottlerInterface;
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>150</h3>
+                <h3><?= $perkaraMasuk; ?></h3>
 
-                <p>New Orders</p>
+                <p>Perkara Masuk</p>
             </div>
             <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -40,9 +40,9 @@ use CodeIgniter\Throttle\ThrottlerInterface;
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3><?= $perkaraPutus; ?></h3>
 
-                <p>Bounce Rate</p>
+                <p>Perkara Putus</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -55,9 +55,9 @@ use CodeIgniter\Throttle\ThrottlerInterface;
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>44</h3>
+                <h3><?= $perkaraMasuk - $perkaraPutus; ?></h3>
 
-                <p>User Registrations</p>
+                <p>Sisa Perkara</p>
             </div>
             <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -70,9 +70,9 @@ use CodeIgniter\Throttle\ThrottlerInterface;
         <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
-                <h3>65</h3>
+                <h3><?= $totalLogin; ?></h3>
 
-                <p>Unique Visitors</p>
+                <p>Total Login</p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -84,4 +84,24 @@ use CodeIgniter\Throttle\ThrottlerInterface;
 </div>
 <!-- /.row -->
 
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <canvas id="myChart" style="height: 100; width:100"></canvas>
+            </div>
+        </div>
+    </div>
+</div><!--./col -->
+</div> <!-- ./row
+
 <?= $this->endSection() ?>
+
+<?= $this->section('pageScripts'); ?>
+<!-- Chartjs -->
+<script src="<?= base_url() ?>plugins/chart.js/Chart.min.js"></script>
+
+<!-- Dashboard js -->
+<script src="assets/js/admindash.js"></script>
+
+<?= $this->endSection(); ?>

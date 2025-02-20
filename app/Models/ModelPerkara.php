@@ -132,4 +132,24 @@ SUM(IF(month(`created_at`) = 12 AND year(`created_at`) =$tahun, 1, 0 )) AS `des`
 FROM tb_perkara WHERE `id_user` = $user;");
         return $data->getResultArray();
     }
+    public function getRekapBulanAll()
+    {
+        $db = db_connect();
+        $tahun = date('Y');
+        $data = $db->query("SELECT 
+SUM(IF(month(`created_at`) = 01 AND year(`created_at`) =$tahun, 1, 0 )) AS `jan`,
+SUM(IF(month(`created_at`) = 02 AND year(`created_at`) =$tahun, 1, 0 )) AS `feb`,
+SUM(IF(month(`created_at`) = 03 AND year(`created_at`) =$tahun, 1, 0 )) AS `mar`,
+SUM(IF(month(`created_at`) = 04 AND year(`created_at`) =$tahun, 1, 0 )) AS `apr`,
+SUM(IF(month(`created_at`) = 05 AND year(`created_at`) =$tahun, 1, 0 )) AS `mei`,
+SUM(IF(month(`created_at`) = 06 AND year(`created_at`) =$tahun, 1, 0 )) AS `jun`,
+SUM(IF(month(`created_at`) = 07 AND year(`created_at`) =$tahun, 1, 0 )) AS `jul`,
+SUM(IF(month(`created_at`) = 08 AND year(`created_at`) =$tahun, 1, 0 )) AS `agu`,
+SUM(IF(month(`created_at`) = 09 AND year(`created_at`) =$tahun, 1, 0 )) AS `sep`,
+SUM(IF(month(`created_at`) = 10 AND year(`created_at`) =$tahun, 1, 0 )) AS `okt`,
+SUM(IF(month(`created_at`) = 11 AND year(`created_at`) =$tahun, 1, 0 )) AS `nov`,
+SUM(IF(month(`created_at`) = 12 AND year(`created_at`) =$tahun, 1, 0 )) AS `des`
+FROM tb_perkara;");
+        return $data->getResultArray();
+    }
 }

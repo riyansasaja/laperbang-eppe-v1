@@ -20,7 +20,6 @@
                         <i class="nav-icon fas fa-tachometer-alt mr-2"></i>
                         <p>
                             Dashboard
-                            <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
                 </li>
