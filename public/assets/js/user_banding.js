@@ -1,8 +1,25 @@
 $(document).ready(function () {
+
 //panggil fungsi getbanding
 // getbanding()
 let getperkara = $('#dataPerkara').DataTable({
-   "ajax": `${baseUrl}user/getbanding`,
+   "ajax": {
+     url : `${baseUrl}user/getbanding`,
+     type : 'GET',
+     dataSrc : '',
+     error: function(jqXHR, textStatus, errorThrown) {
+                // Menampilkan pesan error
+                console.error('ini depe console error:', textStatus, errorThrown);
+                Swal.fire({
+                    title: "Mohon Maaf",
+                    text: 'data kosong atau tidak ditemukan ! Silahkan tambahkan data',
+                    icon: "warning"
+                  });
+            }
+   } ,
+   
+   
+   
         "columns": [
             {
                 "data": null, "sortable": false,
@@ -22,7 +39,8 @@ let getperkara = $('#dataPerkara').DataTable({
                 <a href="javascript:;" id='view_doc' class="badge text-bg-warning text-decoration-none"><i class="bi bi-vector-pen"> Edit</i>`
                 }
             }
-        ]
+        ],
+        
 });
 
 

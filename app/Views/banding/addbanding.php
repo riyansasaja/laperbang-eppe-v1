@@ -44,6 +44,7 @@
                                 <option value="<?= $perkara['nama_jp'] ?>"><?= $perkara['nama_jp'] ?></option>
                             <?php endforeach ?>
                         </select>
+                        <input class="form-control mt-3" type="text" placeholder="Input Jenis Perkara Lainnya" id="otheroption" hidden>
                     </div>
                 </div>
                 <div class="row mb-3">
