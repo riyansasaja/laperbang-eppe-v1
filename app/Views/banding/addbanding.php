@@ -50,7 +50,7 @@
                 <div class="row mb-3">
                     <label for="pihak_p" class="col-sm-4 col-form-label">Nama Pihak Penggugat</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="pihak_p" name="pihak_p" value="<?= set_value('pihak_p') ?>">
+                        <input type="text" class="form-control text-uppercase" id="pihak_p" name="pihak_p" value="<?= set_value('pihak_p') ?>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -62,7 +62,7 @@
                 <div class="row mb-3">
                     <label for="pihak_t" class="col-sm-4 col-form-label">Nama Pihak Tergugat</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="pihak_t" name="pihak_t" value="<?= set_value('pihak_t') ?>">
+                        <input type="text" class="form-control text-uppercase" id="pihak_t" name="pihak_t" value="<?= set_value('pihak_t') ?>">
                     </div>
                 </div>
                 <div class="row mb-3">

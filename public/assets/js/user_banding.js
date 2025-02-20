@@ -6,7 +6,6 @@ let getperkara = $('#dataPerkara').DataTable({
    "ajax": {
      url : `${baseUrl}user/getbanding`,
      type : 'GET',
-     dataSrc : '',
      error: function(jqXHR, textStatus, errorThrown) {
                 // Menampilkan pesan error
                 console.error('ini depe console error:', textStatus, errorThrown);
@@ -40,6 +39,10 @@ let getperkara = $('#dataPerkara').DataTable({
                 }
             }
         ],
+
+        language: {
+            emptyTable: 'Tidak ada data yang tersedia' // Pesan untuk tabel kosong
+        }
         
 });
 
