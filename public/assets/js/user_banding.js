@@ -35,7 +35,7 @@ let getperkara = $('#dataPerkara').DataTable({
                 "targets": [0],
                 render : function (data, type, row, meta) {
                    return  `<a href="${baseUrl}user/upload/${row.id_perkara}" id='upload' class="badge text-bg-info text-decoration-none me-2"><i class="bi bi-cloud-arrow-up"></i> Upload</i> <br>
-                <a href="javascript:;" id='view_doc' class="badge text-bg-warning text-decoration-none"><i class="bi bi-vector-pen"> Edit</i>`
+                <a href="${baseUrl}user/editbanding/${row.id_perkara}" id='edit' class="badge text-bg-warning text-decoration-none item_edit"><i class="bi bi-vector-pen"> Edit</i>`
                 }
             }
         ],
@@ -77,6 +77,7 @@ function getbanding() {
     });
 
 }
+
 
   
 

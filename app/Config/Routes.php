@@ -48,6 +48,8 @@ $routes->group("user", ['filter' => 'role:user'], function ($routes) {
     $routes->get('banding', 'Banding::index');
     $routes->get('getbanding', 'Banding::getPerkarabanding');
     $routes->get('addbanding', 'Banding::addPerkarabanding');
+    $routes->get('editbanding/(:num)', 'Banding::editPerkaraBanding/$1');
+    $routes->post('editbanding/(:num)', 'Banding::editPerkaraBanding/$1');
     $routes->post('addbanding', 'Banding::addPerkarabanding');
     $routes->get('upload/(:num)', 'Banding::uploadBundel/$1');
     $routes->post('uploadb', 'Banding::uploadBundelB');

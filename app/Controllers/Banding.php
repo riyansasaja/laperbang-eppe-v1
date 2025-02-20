@@ -96,6 +96,52 @@ class Banding extends BaseController
         }
     }
 
+    public function editPerkaraBanding($id)
+    {
+        // inisiasi modul
+        $modeljp = new ModelJenisPerkara();
+        $modelPerkara = new ModelPerkara();
+
+        //ambil seluruh data jenis perkara di simpan dalam array perkaras
+        $data['perkaras'] = $modeljp->where('status_jp', 1)->findAll();
+        //ambil detil perkara berdasarkan id di simpan dalam array detilperkara
+        $data['detilperkara'] = $modelPerkara->where('id_perkara', $id)->first();
+        if (!$this->request->is('post')) {
+            # code...
+            return view('banding/editbanding', $data);
+        }
+        $rules = [
+            'no_perkara'        =>  'required',
+            'pihak_p'           =>  'required',
+            'pihak_t'           =>  'required',
+            'hp_pihak_p'        =>  'required|numeric',
+            'hp_pihak_t'        =>  'required|numeric',
+            'jenis_perkara'     =>  'required',
+            'status'            =>  'required'
+
+        ];
+
+        $data['post'] = $this->request->getPost(array_keys($rules));
+        if (! $this->validateData($data['post'], $rules)) {
+            //flash data for swal2
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()->withInput(); //kembalikan ke addbanding
+        }
+        // If you want to get the validated data.
+        $validData = $this->validator->getValidated();
+        //function for success
+        $update = $modelPerkara->update($id, $validData);
+        if ($update) {
+            # if success insert to database
+            session()->setFlashdata('success', 'Data Perkara Berhasil Diedit'); //set flash data
+            return redirect()->to('user/banding'); //kembalikan ke daftar perkara dengan flash message
+        } else {
+            # code...
+            session()->setFlashdata('error', 'Data Perkara tidak berhasil diedit di database, coba lagi, atau hubungi admin!'); //set flash data
+            return redirect()->to('user/banding'); //kembalikan ke daftar perkara dengan flash message
+        }
+    }
+
     public function uploadBundel($id)
     {
         //inisiasi model
