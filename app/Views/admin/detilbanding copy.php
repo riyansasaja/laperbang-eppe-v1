@@ -84,66 +84,64 @@
 <!-- Tampilan Status Perkara -->
 <div class="row">
     <div class="col-md-6">
-        <div class="overflow-auto">
-            <div class="card  card-outline card-warning" style="height: 16rem;">
-                <div class="card-header">
-                    <h4>Status Perkara <span class="badge text-bg-info"><?= $perkara->status; ?></span></h4>
-                </div>
-                <div class="card-body ">
-                    <?= form_open('admin/set_status'); ?>
-                    <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
+        <div class="card  card-outline card-warning">
+            <div class="card-header">
+                <h4>Status Perkara <span class="badge text-bg-info"><?= $perkara->status; ?></span></h4>
+            </div>
+            <div class="card-body">
+                <?= form_open('admin/set_status'); ?>
+                <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
 
-                    <div class="form-row align-items-center">
-                        <div class="col-auto">
-                            <label for="inlineFormInputName">Pilih Status Perkara</label>
-                        </div>
-                        <div class="col-auto">
-                            <div class="input-group">
-                                <select class="form-control" aria-label="Default select example" id="staper" name="staper">
-                                    <option selected value="none">Open this select menu</option>
-                                    <option value="Proses Penunjukan Pra Majelis">Pra Majelis</option>
-                                    <option value="Pendaftaran Perkara">Pendaftaran Perkara</option>
-                                    <option value="Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
-                                    <option value="Penunjukan Panitera Pengganti">Penunjukan Panitera Pengganti</option>
-                                    <option value="Pembuatan PHS 1">Pembuatan PHS 1</option>
-                                    <option value="Pembuatan PHS Lanjutan">Pembuatan PHS Lanjutan</option>
-                                    <option value="Sidang Lanjutan 1">Sidang Lanjutan 1</option>
-                                    <option value="Sidang Lanjutan 2">Sidang Lanjutan 2</option>
-                                    <option value="Sidang Lanjutan 3">Sidang Lanjutan 3</option>
-                                    <option value="Sidang Lanjutan 4">Sidang Lanjutan 4</option>
-                                    <option value="Sidang Lanjutan 5">Sidang Lanjutan 5</option>
-                                    <option value="Penetapan Putusan">Penetapan Putusan</option>
-                                    <option value="Pembacaan Putusan">Pembacaan Putusan</option>
-                                    <option value="Minutasi">Minutasi</option>
-                                    <option value="Pengiriman Salinan Putusan">Pengiriman Salinan Putusan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <button id="simpan" type="submit" class="btn bg-indigo">Submit</button>
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label for="inlineFormInputName">Pilih Status Perkara</label>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <select class="form-control" aria-label="Default select example" id="staper" name="staper">
+                                <option selected value="none">Open this select menu</option>
+                                <option value="Proses Penunjukan Pra Majelis">Pra Majelis</option>
+                                <option value="Pendaftaran Perkara">Pendaftaran Perkara</option>
+                                <option value="Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
+                                <option value="Penunjukan Panitera Pengganti">Penunjukan Panitera Pengganti</option>
+                                <option value="Pembuatan PHS 1">Pembuatan PHS 1</option>
+                                <option value="Pembuatan PHS Lanjutan">Pembuatan PHS Lanjutan</option>
+                                <option value="Sidang Lanjutan 1">Sidang Lanjutan 1</option>
+                                <option value="Sidang Lanjutan 2">Sidang Lanjutan 2</option>
+                                <option value="Sidang Lanjutan 3">Sidang Lanjutan 3</option>
+                                <option value="Sidang Lanjutan 4">Sidang Lanjutan 4</option>
+                                <option value="Sidang Lanjutan 5">Sidang Lanjutan 5</option>
+                                <option value="Penetapan Putusan">Penetapan Putusan</option>
+                                <option value="Pembacaan Putusan">Pembacaan Putusan</option>
+                                <option value="Minutasi">Minutasi</option>
+                                <option value="Pengiriman Salinan Putusan">Pengiriman Salinan Putusan</option>
+                            </select>
                         </div>
                     </div>
-                    <?= form_close(); ?>
-                    <hr>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>STATUS</th>
-                                <th>DATE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($status_perkara as $key => $status) : ?>
-                                <tr>
-                                    <td><?= $status['status']; ?></td>
-                                    <td><?= date('d-m-Y', strtotime($status['tgl_status'])); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-
-                        </tbody>
-
-                    </table>
+                    <div class="col-auto">
+                        <button id="simpan" type="submit" class="btn bg-indigo">Submit</button>
+                    </div>
                 </div>
+                <?= form_close(); ?>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>STATUS</th>
+                            <th>DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($status_perkara as $key => $status) : ?>
+                            <tr>
+                                <td><?= $status['status']; ?></td>
+                                <td><?= date('d-m-Y', strtotime($status['tgl_status'])); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>
@@ -238,8 +236,42 @@
 </div>
 
 
-<!-- 20250220 Menghapus Modal Pramajelis ada di file -Copy -->
+<!-- 20250220 Menghapus Modal Pramajelis  -->
+<!-- ModalPramejelis -->
+<div class="modal fade" id="pramejelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form kirim perkara -->
+            <?= form_open('admin/setpramajelis'); ?>
+            <?= form_hidden('no_perkara', $perkara->no_perkara); ?>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="pramajelisselect">Pilih Majelis</label>
+                    <select class="form-control" id="pramajelisselect" name="nama_majelis">
+                        <option value="">Pilih Salah Satu</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                        <option value="C3">C3</option>
+                    </select>
+                </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            <?= form_close(); ?>
+        </div>
+    </div>
+</div>
 
 <!-- Modal Majelis -->
 <div class="modal fade" id="mejelisModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

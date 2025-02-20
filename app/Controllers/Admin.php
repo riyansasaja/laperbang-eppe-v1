@@ -31,6 +31,7 @@ class Admin extends BaseController
     private $validation;
     private $lspModel;
 
+    private $phoneketua;
     protected $auth;
 
     /**
@@ -59,6 +60,8 @@ class Admin extends BaseController
         $this->config = config('Auth');
         $this->auth   = service('authentication');
         $this->validation = service('validation');
+
+        $this->phoneketua = $this->userModel->getPhoneKetua();
 
         date_default_timezone_set('Asia/Singapore');
     }
@@ -566,14 +569,28 @@ class Admin extends BaseController
         $validData = $this->validation->getValidated();
         //ambil data perkara di tb_perkara
         $perkara = $this->modelPerkara->getidByNomor($validData['no_perkara']);
+        $phone = $this->modelPerkara->getphonebyNumber($validData['no_perkara']);
         //ambil id Perkara
         $id_perkara = $perkara->id_perkara;
+
         //$data update
         $data_update = [
             'status' => $validData['staper'],
         ];
         //update database
         $this->modelPerkara->update($id_perkara, $data_update);
+
+        //cek Setelah update database apakah status penunjukan Pramajelis
+        // jika status penunjukan pramajelis maka beri notifikasi kepada ketua / wakil ketua
+
+        if ($data_update['status'] == "Proses Penunjukan Pra Majelis") {
+            # Kirim Notifikasi ke ketua
+            $ketuamessage = "Perkara Nomor " . $validData['no_perkara'] . " Menunggu untuk ditentukan Pra Majelis.";
+            notification($this->phoneketua->phone, $ketuamessage);
+        }
+        //beri notifikasi kepada para pihak
+        $message = "YTH. Para Pihak, Status Perkara Banding Nomor: " . $validData['no_perkara'] . " Adalah : Proses Penunjukan Pra Majelis";
+        notification($phone->hp_pihak_p . "," . $phone->hp_pihak_t, $message);
         //Pemberitahuan Swal
         session()->setFlashdata('success', 'Data Status Berhasil di Rubah');
         //Return Back

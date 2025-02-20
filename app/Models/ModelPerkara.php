@@ -74,6 +74,15 @@ class ModelPerkara extends Model
         return $db->get()->getFirstRow();
     }
 
+    public function getphonebyNumber($nomor_perkara)
+    {
+        $db = $this->db->table($this->table);
+        $db->select('hp_pihak_p');
+        $db->select('hp_pihak_t');
+        $db->where('no_perkara', $nomor_perkara);
+        return $db->get()->getFirstRow();
+    }
+
     //methode untuk callback after update
     public function lspUpdate(array $data)
     {

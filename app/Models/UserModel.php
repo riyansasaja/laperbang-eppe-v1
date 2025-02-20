@@ -136,4 +136,19 @@ class UserModel extends Model
             'password' => bin2hex(random_bytes(16)),
         ]);
     }
+
+    public function getPhoneKetua()
+    {
+        $db = $this->db->table($this->table);
+        $db->select('phone');
+        $db->where('jabatan', 'Ketua');
+        return $db->get()->getFirstRow();
+    }
+    public function getPhoneWakil()
+    {
+        $db = $this->db->table($this->table);
+        $db->select('phone');
+        $db->where('jabatan', 'Wakil Ketua');
+        return $db->get()->getFirstRow();
+    }
 }

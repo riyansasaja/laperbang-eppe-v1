@@ -18,12 +18,13 @@ function notification($target, $message)
         CURLOPT_POSTFIELDS => array(
             'target' => $target,
             'message' => $message . "
+    untuk Info lebih lanjut silahkan mengunjungi https://laperbang.pta-manado.go.id/      
 --- Pesan Ini Dikirim Otomatis, Harap untuk tidak dibalas ---,
 terima kasih ",
             'delay' => '2'
         ),
         CURLOPT_HTTPHEADER => array(
-            "Authorization: sAZJpFT7ntDM4+!gJ+h-"
+            "Authorization: 3W5ycCuAB4r4szc6gwq5"
         ),
     ));
 
