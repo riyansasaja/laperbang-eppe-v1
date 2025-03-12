@@ -17,12 +17,13 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
+<?php  helper('user'); ?>
 
 <div class="row">
     <div class="col">
-        <?php $prapmh = false; ?>
 
-        <?php if (!$prapmh) : ?>
+        <?php /** @var TYPE_NAME $prapmh */
+        if (!$prapmh) : ?>
 
             <div class="card">
                 <div class="card-body">
@@ -55,9 +56,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
-
+<!--looping table row nya dari data prapmh-->
+                            <?php $no = 1; ?>
+                            <?php foreach ($prapmh as $prapmh) : ?>
+                                    <tr>
+                                        <td><?= $no ?></td>
+                                        <td><?= $prapmh['no_perkara'] ?></td>
+                                        <td><?= get_username_by_id($prapmh['id_user'])  ?></td>
+                                        <td><?= $prapmh['jenis_perkara'] ?></td>
+                                        <td>
+                                            <a id="modal" href="" class="text-decoration-none text-black" data-toggle="modal" data-target="#exampleModal" data-id= <?= $prapmh['id_perkara'] ?> >
+                                            <i class="fas fa-wave-square"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                            <?php endforeach; ?>
 
                             </tbody>
                         </table>
@@ -91,10 +104,48 @@
     </div>
 </div>
 
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pilih Pra Majelis</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
 <script src="<?= base_url('assets/js/validator.js') ?>"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
+
+
+    <script>
+        modal = document.getElementById("modal");
+        modal.addEventListener("click", function () {
+            console.info(this.getAttribute('data-id'));
+        })
+    </script>
+
+
 <?= $this->endSection() ?>

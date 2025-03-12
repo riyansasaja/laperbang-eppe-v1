@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var $users
+ * @var $datagroups
+**/
+?>
+
+
 <?= $this->extend('dashboard/layout') ?>
 
 <?= $this->section('header') ?>
@@ -27,7 +35,7 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
 ?>
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <div class="row row-cols-auto">
