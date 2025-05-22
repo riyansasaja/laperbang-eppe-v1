@@ -157,14 +157,18 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Pramajelis</th>
+                            <th>Pra Majelis</th>
                             <th>Majelis</th>
                             <th>PP</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>afdfsaf <br>fdfasfas <br>fdsfafa</td>
+                            <td>
+                                <?php foreach ($pramajelis as $prm) : ?>
+                                    <?= get_fullname_by_id($prm['id_user']); ?> <br>
+                                <?php endforeach ?>
+                            </td>
                             <td>afdfsaf <br>fdfasfas <br>fdsfafa</td>
                             <td>dfdsfasd</td>
 
