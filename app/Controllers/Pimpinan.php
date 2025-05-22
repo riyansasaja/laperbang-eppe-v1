@@ -19,6 +19,7 @@ class Pimpinan extends BaseController
         $groupModel = new GroupModel();
         $modalPerkara = new ModelPerkara();
         $data['prapmh'] = $modalPerkara->where('status', 'Proses Penunjukan Pra Majelis')->findAll();
+        $data['majelis_hakim'] = $modalPerkara->where('status', 'Proses Penunjukan Majelis Hakim')->findAll();
         $data['para_hakim'] = $groupModel->getUsersForGroup(6);
 
         // dd($data['para_hakim']);
@@ -29,7 +30,47 @@ class Pimpinan extends BaseController
         //kembali ke tampilan pimpinan
         return view('pimpinan/show', $data);
     }
+
+    public function pilihMajelis()
+    {
+        $groupModel = new GroupModel();
+        $modalPerkara = new ModelPerkara();
+        $data['prapmh'] = $modalPerkara->where('status', 'Proses Penunjukan Majelis Hakim')->findAll();
+        $data['para_hakim'] = $groupModel->getUsersForGroup(6);
+        return view('pimpinan/show_pilih_majelis', $data);
+    }
+
     public function pramajelis()
+    {
+
+        $modelPerkara = new ModelPerkara();
+        $id_perkara = $this->request->getPost('id_perkara');
+        $id_user_hakim = $this->request->getPost('id_user_hakim');
+        foreach ($id_user_hakim as $nm) {
+            # code...
+            $this->savePraMajelis($nm, $id_perkara);
+        }
+
+        $edit_perkara = [
+            'status' => 'Penunjukan Pra Majelis'
+        ];
+        $modelPerkara->update($id_perkara, $edit_perkara);
+        session()->setFlashdata('success', 'Data Pra Majelis berhasil dipilih'); //set flash data
+        return redirect()->back();
+    }
+
+    private function savePraMajelis($id_user_hakim, $id_perkara)
+    {
+        $pramajelisModel = new PramajelisModel();
+        $data = [
+            'id_perkara' => $id_perkara,
+            'id_user' => $id_user_hakim
+        ];
+
+        return $pramajelisModel->save($data);
+    }
+
+    public function majelis()
     {
 
         $modelPerkara = new ModelPerkara();
@@ -41,21 +82,21 @@ class Pimpinan extends BaseController
         }
 
         $edit_perkara = [
-            'status' => 'Penunjukan Pra Majelis'
+            'status' => 'Penunjukan Majelis'
         ];
         $modelPerkara->update($id_perkara, $edit_perkara);
-        session()->setFlashdata('success', 'Data Pra Majelis berhasil dipilih'); //set flash data
+        session()->setFlashdata('success', 'Data Majelis berhasil dipilih'); //set flash data
         return redirect()->back();
     }
 
     private function saveMajelis($id_user_hakim, $id_perkara)
     {
-        $pramajelisModel = new PramajelisModel();
+        $majelisModel = new MajelisBaruModel();
         $data = [
             'id_perkara' => $id_perkara,
             'id_user' => $id_user_hakim
         ];
 
-        return $pramajelisModel->save($data);
+        return $majelisModel->save($data);
     }
 }

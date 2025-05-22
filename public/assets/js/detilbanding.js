@@ -11,14 +11,6 @@ $(document).ready(function () {
                 e.preventDefault();
                 alert('error','Silahkan pilih status perkara terlebih dahulu')
                 break;
-            case 'Pra Majelis':
-                e.preventDefault();
-                $('#pramejelisModal').modal('show')
-                break;
-            case 'Penunjukan Majelis Hakim':
-                e.preventDefault();
-                $('#mejelisModal').modal('show')
-                break;
             case 'Pendaftaran Perkara':
                 e.preventDefault();
                 $('#daftarModal').modal('show')

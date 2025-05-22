@@ -9,6 +9,7 @@ use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
 use App\Models\ModelLSP;
 use App\Models\ModelPerkara;
+use App\Models\PramajelisModel;
 use App\Models\TimeControlModel;
 use App\Models\UploadPutusanModel;
 use App\Models\UserModel;
@@ -190,10 +191,11 @@ class Admin extends BaseController
         $detilperkara = $this->modelPerkara->where('no_perkara', $nomorperkara)->first();
         $id_perkara = $detilperkara['id_perkara'];
         // get pramajelis where id_perkara = $id_perkara findall()
-
+        $tb_pra_majelis = new PramajelisModel();
+        $data['pramajelis'] = $tb_pra_majelis->where('id_perkara', $id_perkara)->findAll();
         //get majelis where id_perkara == $idperkara findall()
-        $tbMajelis = new MajelisBaruModel();
-        $data['pramajelis'] = $tbMajelis->where('id_perkara', $id_perkara)->findAll();
+        $tb_majelis = new MajelisBaruModel();
+        $data['majelis'] = $tb_majelis->where('id_perkara', $id_perkara)->findAll();
 
         //get pp where id_perkara = $idperkara findall()
 
@@ -597,6 +599,12 @@ class Admin extends BaseController
         if ($data_update['status'] == "Proses Penunjukan Pra Majelis") {
             # Kirim Notifikasi ke ketua
             $ketuamessage = "Perkara Nomor " . $validData['no_perkara'] . " Menunggu untuk ditentukan Pra Majelis.";
+            notification($this->phoneketua->phone, $ketuamessage);
+        }
+        //proses penunjukan majelis hakim
+        if ($data_update['status'] == "Proses Penunjukan Majelis Hakim") {
+            # Kirim Notifikasi ke ketua
+            $ketuamessage = "Perkara Nomor " . $validData['no_perkara'] . " Menunggu untuk ditentukan Majelis Hakim";
             notification($this->phoneketua->phone, $ketuamessage);
         }
         //beri notifikasi kepada para pihak

@@ -36,7 +36,12 @@
                     <li class="nav-header">Penunjukan Majelis Hakim</li>
                     <li class="nav-item">
                         <a href="<?= base_url('pimpinan') ?>" class="nav-link"> <i class="fas fa-check-circle"></i>
-                            <p> PRA PMH/PMH</p>
+                            <p> Penentuan PRA Majelis</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('pimpinan/pilihmajelis') ?>" class="nav-link"> <i class="fas fa-check-circle"></i>
+                            <p> Penentuan Majelis</p>
                         </a>
                     </li>
                     <li class="nav-header">Manajemen Banding</li>
@@ -90,11 +95,6 @@
                     <li class="nav-item">
                         <a href="<?= base_url('admin/users') ?>" class="nav-link"> <i class="fas fa-users mr-2"></i>
                             <p>User Management</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= base_url('admin/majelis') ?>" class="nav-link"> <i class="fas fa-gavel mr-2"></i>
-                            <p>Majelis Hakim</p>
                         </a>
                     </li>
 

@@ -83,7 +83,7 @@
 
 <!-- Tampilan Status Perkara -->
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="overflow-auto">
             <div class="card  card-outline card-warning" style="height: 16rem;">
                 <div class="card-header">
@@ -103,7 +103,7 @@
                                     <option selected value="none">Open this select menu</option>
                                     <option value="Proses Penunjukan Pra Majelis">Pra Majelis</option>
                                     <option value="Pendaftaran Perkara">Pendaftaran Perkara</option>
-                                    <option value="Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
+                                    <option value="Proses Penunjukan Majelis Hakim">Penunjukan Majelis Hakim</option>
                                     <option value="Penunjukan Panitera Pengganti">Penunjukan Panitera Pengganti</option>
                                     <option value="Pembuatan PHS 1">Pembuatan PHS 1</option>
                                     <option value="Pembuatan PHS Lanjutan">Pembuatan PHS Lanjutan</option>
@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="card  card-outline card-warning">
             <div class="card-header">
                 <h5>Data Majelis dan PP</h5>
@@ -169,7 +169,11 @@
                                     <?= get_fullname_by_id($prm['id_user']); ?> <br>
                                 <?php endforeach ?>
                             </td>
-                            <td>afdfsaf <br>fdfasfas <br>fdsfafa</td>
+                            <td>
+                                <?php foreach ($majelis as $mjls) : ?>
+                                    <?= get_fullname_by_id($mjls['id_user']); ?> <br>
+                                <?php endforeach ?>
+                            </td>
                             <td>dfdsfasd</td>
 
                         </tr>

@@ -41,7 +41,9 @@ $routes->group('hakim',  ['filter' => 'role:hakim'], function ($routes) {
 
 $routes->group('pimpinan',  ['filter' => 'role:ketua,wakil ketua'], function ($routes) {
     $routes->get('/', 'Pimpinan::index');
+    $routes->get('pilihmajelis', 'Pimpinan::pilihMajelis');
     $routes->post('pramajelis', 'Pimpinan::pramajelis');
+    $routes->post('majelis', 'Pimpinan::majelis');
     $routes->get('detilperkara/(:num)', 'Hakim::detilPerkara/$1');
 });
 
