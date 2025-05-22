@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class PramajelisModel extends Model
 {
-    protected $table            = 'tb_pramajelis';
-    protected $primaryKey       = 'id_pramajelis';
+    protected $table            = 'tb_pra_majelis';
+    protected $primaryKey       = 'id_pra_majelis';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_perkara', 'nama_majelis'];
+    protected $allowedFields    = ['id_perkara', 'id_user'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

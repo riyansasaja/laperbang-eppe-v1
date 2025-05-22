@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\MajelisBaruModel;
 use App\Models\ModelPerkara;
+use App\Models\PramajelisModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Myth\Auth\Models\GroupModel;
 use CodeIgniter\API\ResponseTrait;
@@ -49,12 +50,12 @@ class Pimpinan extends BaseController
 
     private function saveMajelis($id_user_hakim, $id_perkara)
     {
-        $majelisModel = new MajelisBaruModel();
+        $pramajelisModel = new PramajelisModel();
         $data = [
             'id_perkara' => $id_perkara,
             'id_user' => $id_user_hakim
         ];
 
-        return $majelisModel->save($data);
+        return $pramajelisModel->save($data);
     }
 }

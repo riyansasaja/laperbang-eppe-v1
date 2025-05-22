@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MajelisBaruModel;
 use App\Models\MajelisModel;
 use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
@@ -191,7 +192,8 @@ class Admin extends BaseController
         // get pramajelis where id_perkara = $id_perkara findall()
 
         //get majelis where id_perkara == $idperkara findall()
-
+        $tbMajelis = new MajelisBaruModel();
+        $data['pramajelis'] = $tbMajelis->where('id_perkara', $id_perkara)->findAll();
 
         //get pp where id_perkara = $idperkara findall()
 
