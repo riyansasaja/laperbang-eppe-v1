@@ -183,10 +183,19 @@ class Admin extends BaseController
         //get post nomor perkara
         $nomorperkara = decodelink($no);
         //getdetilbynomor
+        // dd($nomorperkara);
         $data['perkara'] = $this->modelPerkara->getdetilByNomor($nomorperkara);
         //ambil id perkara
         $detilperkara = $this->modelPerkara->where('no_perkara', $nomorperkara)->first();
         $id_perkara = $detilperkara['id_perkara'];
+        // get pramajelis where id_perkara = $id_perkara findall()
+
+        //get majelis where id_perkara == $idperkara findall()
+
+
+        //get pp where id_perkara = $idperkara findall()
+
+
         //getbundelA by id perkara
         $data['bundela'] = $this->modelBundelA->where('id_perkara', $id_perkara)->findAll();
         //getbundelB by id perkara

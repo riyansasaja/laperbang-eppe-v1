@@ -38,8 +38,15 @@ class Hakim extends BaseController
     {
         //ambil data majelis
         $majelis = $this->modelMajelis->where('id_user', user()->id)->first();
-        //ambil data perkara
-        $data['perkara'] = $this->modelPerkara->where('majelis', $majelis['Majelis'])->findAll();
+        //cek null atau tidak
+        if (is_null($majelis)) {
+            $data['perkara'] =  [];
+        } else {
+            # code...
+            //ambil data perkara
+            $data['perkara'] = $this->modelPerkara->where('majelis', $majelis['Majelis'])->findAll();
+        }
+
         return view('hakim/getbanding', $data);
     }
 

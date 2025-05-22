@@ -17,7 +17,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
-<?php  helper('user'); ?>
+<?php helper('user'); ?>
 
 <div class="row">
     <div class="col">
@@ -56,21 +56,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-<!--looping table row nya dari data prapmh-->
-                            <?php $no = 1; ?>
-                            <?php foreach ($prapmh as $prapmh) : ?>
+                                <!--looping table row nya dari data prapmh-->
+                                <?php $no = 1; ?>
+                                <?php foreach ($prapmh as $pmh) : ?>
                                     <tr>
                                         <td><?= $no ?></td>
-                                        <td><?= $prapmh['no_perkara'] ?></td>
-                                        <td><?= get_username_by_id($prapmh['id_user'])  ?></td>
-                                        <td><?= $prapmh['jenis_perkara'] ?></td>
+                                        <td><?= $pmh['no_perkara'] ?></td>
+                                        <td><?= get_username_by_id($pmh['id_user'])  ?></td>
+                                        <td><?= $pmh['jenis_perkara'] ?></td>
                                         <td>
-                                            <a id="modal" href="" class="text-decoration-none text-black" data-toggle="modal" data-target="#exampleModal" data-id= <?= $prapmh['id_perkara'] ?> >
-                                            <i class="fas fa-wave-square"></i>
+                                            <a href="" class="text-decoration-none text-black btn-edit" data-toggle="modal" data-target="#exampleModal" data-id=<?= $pmh['id_perkara'] ?>>
+                                                <i class="fas fa-wave-square"></i>
                                             </a>
                                         </td>
                                     </tr>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
 
                             </tbody>
                         </table>
@@ -86,47 +86,41 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="actionValidasi" tabindex="-1">
-    <div class="modal-dialog modal-fullscreen">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Pilih Pra Majelis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                ...
+                <?= form_open('/pimpinan/pramajelis'); ?>
+                <input type="text" id="editId" name="id_perkara" hidden>
+                <?php $num = 1; ?>
+                <?php foreach ($para_hakim as $nama_hakim) : ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="<?= $nama_hakim['user_id'] ?>" id="check<?= $num ?>" name="id_user_hakim[]">
+                        <label class="form-check-label" for="check<?= $num ?>">
+                            <?= $nama_hakim['fullname']; ?>
+                        </label>
+                    </div>
+                    <?php $num++; ?>
+                <?php endforeach ?>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
+            <?= form_close() ?>
         </div>
     </div>
 </div>
 
 
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pilih Pra Majelis</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -140,12 +134,24 @@
 <script src="https://cdn.datatables.net/2.1.6/js/dataTables.bootstrap5.min.js"></script>
 
 
-    <script>
-        modal = document.getElementById("modal");
-        modal.addEventListener("click", function () {
-            console.info(this.getAttribute('data-id'));
-        })
-    </script>
+<script>
+    // Tangkap semua tombol edit
+    const editButtons = document.querySelectorAll('.btn-edit');
+
+    // Tambahkan event listener ke setiap tombol
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Ambil data dari atribut data-
+            const id = this.getAttribute('data-id');
+
+            // Isi form modal dengan data
+            document.getElementById('editId').value = id;
+
+            // Tampilkan modal
+            editModal.show();
+        });
+    });
+</script>
 
 
 <?= $this->endSection() ?>

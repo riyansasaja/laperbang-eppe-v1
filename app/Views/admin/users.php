@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @var $users
  * @var $datagroups
-**/
+ * @var $groupModel
+ **/
 ?>
 
 
@@ -39,9 +41,6 @@ $groupModel = new \Myth\Auth\Models\GroupModel();
         <div class="card">
             <div class="card-header">
                 <div class="row row-cols-auto">
-                    <div class="col-2">
-                        <img src="<?= base_url('assets/img/user.png') ?>" class="img-fluid">
-                    </div>
                     <div class="col-9">
                         <div class="float-start">
                             <span class="fs-1">Users List</span>

@@ -147,6 +147,33 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="card  card-outline card-warning">
+            <div class="card-header">
+                <h5>Data Majelis dan PP</h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Pramajelis</th>
+                            <th>Majelis</th>
+                            <th>PP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>afdfsaf <br>fdfasfas <br>fdsfafa</td>
+                            <td>afdfsaf <br>fdfasfas <br>fdsfafa</td>
+                            <td>dfdsfasd</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- end tampilan status perkara -->
 
