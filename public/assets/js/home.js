@@ -35,6 +35,7 @@ $(document).ready(function () {
         let no = $("input[name='no']").val()
         let tahun = $('#inputTahun').val();
         let noper = `${no}/Pdt.G/${tahun}/PTA.Mdo`
+
        //panggil ajax
         $.ajax({
             type: "get",
@@ -45,7 +46,9 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
-             
+                
+                console.log(response);
+
                 let nomor = 1
                 //looping hasil response ajax
                 $.each(response.data, function (i, val) { 

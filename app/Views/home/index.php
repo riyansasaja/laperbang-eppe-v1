@@ -138,12 +138,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- for jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="<?= base_url('assets/') ?>js/home.js"></script>
     <script>
         let baseUrl = <?= json_encode(base_url()) ?>;
         let error = <?= json_encode(session()->getFlashdata('error')) ?>;
         let success = <?= json_encode(session()->getFlashdata('success')) ?>;
     </script>
+    <script src="<?= base_url('assets/') ?>js/home.js"></script>
 
 </body>
 

@@ -30,11 +30,11 @@ class ApiLogStatus extends BaseController
 
         $noper = $no . '/' . 'Pdt.G/' . $tahun . '/PTA.Mdo';
         //
+        // return ($noper);
         $modelsp = new ModelLSP();
         $data = $modelsp->where('nomor', $noper)->findAll();
         if (!$data) {
             # code...
-
             return $this->failNotFound('Data Tidak ditemukan');
         } else {
             # code...
