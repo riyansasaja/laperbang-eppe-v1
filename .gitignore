@@ -128,3 +128,5 @@ nb-configuration.xml
 
 /public/uploads/
 /public/plugins/
+
+composer.lock
