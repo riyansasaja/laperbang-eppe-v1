@@ -174,7 +174,9 @@
                                     <?= get_fullname_by_id($mjls['id_user']); ?> <br>
                                 <?php endforeach ?>
                             </td>
-                            <td>dfdsfasd</td>
+                            <td>
+                                <?= get_fullname_by_id($perkara->id_pp); ?>
+                            </td>
 
                         </tr>
                     </tbody>

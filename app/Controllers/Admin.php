@@ -207,7 +207,8 @@ class Admin extends BaseController
         //getstatus perkara
         $data['status_perkara'] = $this->lspModel->where('nomor', $nomorperkara)->findAll();
         //getpanitera_pengganti
-        $data['paniteras'] = $this->userModel->where('jabatan', 'Panitera Pengganti')->findAll();
+        $jabatan = ['Panitera', 'Panitera Pengganti'];
+        $data['paniteras'] = $this->userModel->whereIn('jabatan', $jabatan)->findAll();
         //kembalikan ke view admin detilbanding
         return view('admin/detilbanding', $data);
     }

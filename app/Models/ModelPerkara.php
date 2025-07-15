@@ -60,7 +60,7 @@ class ModelPerkara extends Model
     public function getdetilByNomor($nomor)
     {
         $db = $this->db->table($this->table);
-        $db->select('tb_perkara.no_perkara, tb_perkara.pihak_p, tb_perkara.pihak_t, tb_perkara.jenis_perkara, tb_perkara.no_banding, tb_perkara.status, tb_perkara.created_at, users.fullname, users.username');
+        $db->select('tb_perkara.no_perkara, tb_perkara.pihak_p, tb_perkara.pihak_t, tb_perkara.jenis_perkara, tb_perkara.no_banding, tb_perkara.status, tb_perkara.id_pp, tb_perkara.created_at, users.fullname, users.username');
         $db->where('tb_perkara.no_perkara', $nomor);
         $db->join('users', 'tb_perkara.id_user = users.id');
         return $db->get()->getFirstRow();
