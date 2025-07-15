@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MajelisBaruModel;
 use App\Models\MajelisModel;
 use App\Models\ModelBundelA;
 use App\Models\ModelBundelB;
@@ -28,7 +29,8 @@ class Hakim extends BaseController
     public function __construct()
     {
         $this->modelPerkara = new ModelPerkara();
-        $this->modelMajelis = new MajelisModel();
+        // $this->modelMajelis = new MajelisModel();
+        $this->modelMajelis = new MajelisBaruModel();
         $this->modelbundelA = new ModelBundelA();
         $this->modelbundelB = new ModelBundelB();
         $this->modelUser = new UserModel();
@@ -37,14 +39,21 @@ class Hakim extends BaseController
     public function index()
     {
         //ambil data majelis
-        $majelis = $this->modelMajelis->where('id_user', user()->id)->first();
+        $majelis = $this->modelMajelis->where('id_user', user()->id)->findAll();
+
+        $perkara_majelis = [];
+        foreach ($majelis as $maje) {
+            # code...
+            $perkara_majelis[] = $maje['id_perkara'];
+        }
+
         //cek null atau tidak
         if (is_null($majelis)) {
             $data['perkara'] =  [];
         } else {
             # code...
             //ambil data perkara
-            $data['perkara'] = $this->modelPerkara->where('majelis', $majelis['Majelis'])->findAll();
+            $data['perkara'] = $this->modelPerkara->whereIn('id_perkara', $perkara_majelis)->findAll();
         }
 
         return view('hakim/getbanding', $data);
